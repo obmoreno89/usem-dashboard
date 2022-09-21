@@ -9,6 +9,7 @@ import {
   finishLoading,
   handleEye,
   handleErrorLogin,
+  handleErrorLoginClosed,
 } from '../store/slices/login/loginSlice';
 
 function Signin() {
@@ -45,11 +46,10 @@ function Signin() {
             dispatch(finishLoading());
           }, 1000);
         } else {
-          dispatch(startLoading());
+          dispatch(handleErrorLogin());
           setTimeout(() => {
-            dispatch(finishLoading());
-            dispatch(handleErrorLogin());
-          }, 1000);
+            dispatch(handleErrorLoginClosed());
+          }, 2000);
         }
       });
   };

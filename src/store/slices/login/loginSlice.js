@@ -17,10 +17,18 @@ export const loginSlice = createSlice({
     handleErrorLogin: (state, action) => {
       state.errorLogin = true;
     },
+    handleErrorLoginClosed: (state, action) => {
+      state.errorLogin = false;
+    },
   },
 });
 
-export const { startLoading, finishLoading, handleEye, handleErrorLogin } =
-  loginSlice.actions;
+export const {
+  startLoading,
+  finishLoading,
+  handleEye,
+  handleErrorLogin,
+  handleErrorLoginClosed,
+} = loginSlice.actions;
 
 export default loginSlice.reducer;
