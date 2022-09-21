@@ -38,6 +38,9 @@ function Signin() {
         if (json.code === 202) {
           dispatch(startLoading());
           setTimeout(() => {
+            localStorage.setItem('token', json.token);
+            localStorage.setItem('id', json.id);
+            localStorage.setItem('first_name', json.first_name);
             navigate('/');
             dispatch(finishLoading());
           }, 1000);
