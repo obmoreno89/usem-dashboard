@@ -1,23 +1,55 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import iconLogin from '../images/iconLogin';
 import images from '../images/imagesPNG';
 import { useForm } from 'react-hook-form';
+import LoadingButton from './helpers/LoadingButton';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  startLoading,
+  finishLoading,
+  handleEye,
+  handleErrorLogin,
+} from '../store/slices/login/loginSlice';
 
 function Signin() {
-  const [eye, setEye] = useState(false);
-
-  const toggleEye = () => {
-    setEye((prevState) => !prevState);
-  };
+  const dispatch = useDispatch();
+  const { loading, eye, errorLogin } = useSelector((state) => state.login);
 
   const submit = (data) => console.log(data);
+
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
+
+  const loginUser = (dataUser) => {
+    fetch('http://kpi.syncronik.com/api/auth/login/', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataUser),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.code === 202) {
+          dispatch(startLoading());
+          setTimeout(() => {
+            navigate('/');
+            dispatch(finishLoading());
+          }, 1000);
+        } else {
+          dispatch(startLoading());
+          setTimeout(() => {
+            dispatch(finishLoading());
+            dispatch(handleErrorLogin());
+          }, 1000);
+        }
+      });
+  };
 
   return (
     <main className='bg-white'>
@@ -39,12 +71,12 @@ function Signin() {
               </div>
             </div>
 
-            <div className='max-w-lg mx-auto px-4 py-8'>
+            <div className='w-10/12 mx-auto px-4 py-8'>
               <h1 className='text-3xl text-slate-800 font-bold mb-6'>
                 Hola de nuevo
               </h1>
               {/* Form */}
-              <form onSubmit={handleSubmit(submit)}>
+              <form onSubmit={handleSubmit(loginUser)}>
                 <div className='space-y-4'>
                   {/* INPUT EMAIL */}
                   <div>
@@ -82,10 +114,9 @@ function Signin() {
                       Contraseña
                     </label>
                     <input
-                      id='password'
+                      autoComplete='off'
                       className='form-input w-full'
                       type={eye ? 'text' : 'password'}
-                      autoComplete='off'
                       {...register('password', {
                         required: {
                           value: true,
@@ -99,7 +130,7 @@ function Signin() {
                       </span>
                     )}
                     <button
-                      onClick={toggleEye}
+                      onClick={() => dispatch(handleEye())}
                       type='button'
                       className='absolute right-0 top-5 mt-3 mr-4'>
                       {eye ? (
@@ -118,29 +149,35 @@ function Signin() {
                       ¿Olvidaste tu contraseña?
                     </Link>
                   </div>
-                  <button
-                    type='submit'
-                    className='btn bg-primary hover:bg-secondary hover:text-primary text-white ml-3'>
-                    Iniciar sesión
-                  </button>
+                  {!loading ? (
+                    <button
+                      type='submit'
+                      className='btn bg-primary hover:bg-secondary hover:text-primary text-white ml-3'>
+                      Iniciar sesión
+                    </button>
+                  ) : (
+                    <LoadingButton loading='Ingresando' />
+                  )}
                 </div>
               </form>
               {/* Footer */}
               <div className='pt-5 mt-6 border-t border-slate-200'>
                 {/* Warning */}
-                <div className='mt-5'>
-                  <div className='bg-red-100 text-red-600 px-2 py-2 rounded flex'>
-                    <svg
-                      className='w-4 h-4 shrink-0 fill-current opacity-80 mt-[3px] mr-3'
-                      viewBox='0 0 16 16'>
-                      <path d='M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z' />
-                    </svg>
-                    <span className='text-sm'>
-                      Credenciales Incorrectas, por favor de verificar el
-                      usuario o contraseña.
-                    </span>
+                {errorLogin && (
+                  <div className='mt-5'>
+                    <div className='bg-red-100 text-red-600 px-2 py-2 rounded flex'>
+                      <svg
+                        className='w-3 h-4 shrink-0 fill-current opacity-80 mt-[3px] mr-3'
+                        viewBox='0 0 16 16'>
+                        <path d='M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z' />
+                      </svg>
+                      <span className='text-sm'>
+                        Credenciales Incorrectas, por favor de verificar el
+                        usuario o contraseña.
+                      </span>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
