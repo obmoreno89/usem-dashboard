@@ -48,8 +48,6 @@ function Dashboard() {
 
               <DashboardCard05 />
 
-              <AnalyticsCard10 />
-
               <AnalyticsCard11 />
             </div>
           </div>
