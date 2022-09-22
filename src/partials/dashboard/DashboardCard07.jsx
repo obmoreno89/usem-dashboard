@@ -33,7 +33,7 @@ function DashboardCard07() {
                 </th>
               </tr>
             </thead>
-            {/* Table body */}
+
             <tbody className='text-sm font-medium divide-y divide-slate-100'>
               {/* Row */}
               <tr>
