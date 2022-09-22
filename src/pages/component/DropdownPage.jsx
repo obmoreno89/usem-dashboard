@@ -4,13 +4,13 @@ import Sidebar from '../../partials/Sidebar';
 import Header from '../../partials/Header';
 import DropdownClassic from '../../components/DropdownClassic';
 import DropdownFull from '../../components/DropdownFull';
-import DropdownFilter from '../../components/DropdownFilter';
+import DropdownFilter from '../../partials/dashboard/DropdownFilter';
 import DropdownProfile from '../../partials/dashboard/DropdownProfile';
 import DropdownSwitch from '../../components/DropdownSwitch';
 import DropdownNotifications from '../../components/DropdownNotifications';
 import DropdownHelp from '../../components/DropdownHelp';
 import DropdownEditMenu from '../../components/DropdownEditMenu';
-import Datepicker from '../../components/Datepicker';
+import Datepicker from '../../partials/dashboard/Datepicker';
 
 function DropdownPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
