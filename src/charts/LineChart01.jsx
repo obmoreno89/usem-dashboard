@@ -44,15 +44,15 @@ function LineChart01({ data, width, height, name }) {
         scales: {
           y: {
             display: false,
-            beginAtZero: true,
+            beginAtZero: false,
           },
           x: {
             type: 'time',
             time: {
               parser: 'MM-DD-YYYY',
-              unit: 'month',
+              unit: 'day',
             },
-            display: false,
+            display: true,
           },
         },
         plugins: {

@@ -1,31 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import EditMenu from '../../components/DropdownEditMenu';
 import iconGraph from '../../images/iconGraph';
+import { fetchAccident } from '../../store/slices/accidents/accidentsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard01() {
+  const dispatch = useDispatch();
+  const { accidentList } = useSelector((state) => state.accidents);
+
   const chartData = {
     labels: [
-      '04-01-2022',
-      '05-01-2022',
-      '06-01-2022',
-      '07-01-2022',
-      '08-01-2022',
-      '09-01-2022',
-      '10-01-2022',
-      '11-01-2022',
-      '12-01-2022',
-      '01-01-2023',
+      '01-01-2022',
+      '01-02-2022',
+      '01-03-2022',
+      '01-04-2022',
+      '01-05-2022',
+      '01-06-2022',
+      '01-07-2022',
     ],
     datasets: [
       // Indigo line
       {
-        label: 'Graves',
-        data: [154, 273, 191, 191, 126, 263, 349, 252, 423, 622, 470, 532],
+        label: 'Total',
+        data: [34, 10, 12, 67, 13, 78, 90],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -38,23 +40,12 @@ function DashboardCard01() {
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
         clip: 20,
       },
-      // Gray line
-      {
-        label: 'Regulares',
-        data: [
-          532, 532, 532, 404, 404, 314, 314, 314, 314, 314, 234, 314, 234, 234,
-          314, 314, 314, 388, 314, 202, 202, 202, 202, 314, 720, 642,
-        ],
-        borderColor: tailwindConfig().theme.colors.slate[300],
-        borderWidth: 2,
-        tension: 0,
-        pointRadius: 0,
-        pointHoverRadius: 3,
-        pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
-        clip: 20,
-      },
     ],
   };
+
+  useEffect(() => {
+    dispatch(fetchAccident());
+  }, []);
 
   return (
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
@@ -71,7 +62,9 @@ function DashboardCard01() {
           Nov 20, 2020 - Dec 19, 2020
         </div>
         <div className='flex items-start'>
-          <div className='text-3xl font-bold text-slate-800 mr-2'>2</div>
+          <p className='text-3xl font-bold text-slate-800 mr-2'>
+            {accidentList.length}
+          </p>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}
