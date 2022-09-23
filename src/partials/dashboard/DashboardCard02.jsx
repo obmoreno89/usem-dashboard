@@ -17,8 +17,6 @@ function DashboardCard02() {
   const dateReport = incidentList.map((data) => data.date);
 
   const prueba = incidentList.map((data) => data.id);
-  console.log(prueba);
-  console.log(incidentList);
 
   const chartData = {
     labels: dateReport,
