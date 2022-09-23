@@ -14,12 +14,17 @@ function DashboardCard02() {
   const { incidentList } = useSelector((state) => state.incidents);
   const { dateState } = useSelector((state) => state.state);
 
+  const dateReport = incidentList.map((data) => data.date);
+  const prueba = incidentList.map((data) => data);
+  console.log(prueba);
+
   const chartData = {
-    labels: ['09-01-2022', '09-02-2022', '09-03-2022'],
+    labels: dateReport,
     datasets: [
       // Indigo line
       {
-        data: [622, 622, 426],
+        label: 'Total',
+        data: [2, 4, 7, 1],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -32,7 +37,6 @@ function DashboardCard02() {
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
         clip: 20,
       },
-      // Gray line
     ],
   };
 
@@ -63,7 +67,12 @@ function DashboardCard02() {
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart data={chartData} width={389} height={128} />
+        <LineChart
+          name='Incidentes'
+          data={chartData}
+          width={389}
+          height={128}
+        />
       </div>
     </div>
   );

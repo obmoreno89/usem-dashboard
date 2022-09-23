@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Flatpickr from 'react-flatpickr';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setState } from '../../store/slices/state/stateSlice';
 
 function Datepicker({ align }) {

@@ -49,7 +49,7 @@ function LineChart01({ data, width, height, name }) {
           x: {
             type: 'time',
             time: {
-              parser: 'MM-DD-YYYY',
+              parser: 'YYYY-MM-DD',
               unit: 'day',
             },
             display: true,
@@ -76,7 +76,7 @@ function LineChart01({ data, width, height, name }) {
     });
     return () => chart.destroy();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return <canvas ref={canvas} width={width} height={height}></canvas>;
 }

@@ -14,17 +14,8 @@ function DashboardCard01() {
   const { accidentList } = useSelector((state) => state.accidents);
 
   const chartData = {
-    labels: [
-      '01-01-2022',
-      '01-02-2022',
-      '01-03-2022',
-      '01-04-2022',
-      '01-05-2022',
-      '01-06-2022',
-      '01-07-2022',
-    ],
+    labels: ['2022-01-03', '2022-01-04', '2022-01-05'],
     datasets: [
-      // Indigo line
       {
         label: 'Total',
         data: [34, 10, 12, 67, 13, 78, 90],
