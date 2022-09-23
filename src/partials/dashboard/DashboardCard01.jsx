@@ -14,11 +14,11 @@ function DashboardCard01() {
   const { accidentList } = useSelector((state) => state.accidents);
 
   const chartData = {
-    labels: ['2022-01-03', '2022-01-04', '2022-01-05'],
+    labels: ['2022-01-03', '2022-01-04'],
     datasets: [
       {
         label: 'Total',
-        data: [34, 10, 12, 67, 13, 78, 90],
+        data: [34, 10],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]

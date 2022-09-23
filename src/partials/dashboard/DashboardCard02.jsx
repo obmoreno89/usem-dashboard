@@ -15,8 +15,10 @@ function DashboardCard02() {
   const { dateState } = useSelector((state) => state.state);
 
   const dateReport = incidentList.map((data) => data.date);
-  const prueba = incidentList.map((data) => data);
+
+  const prueba = incidentList.map((data) => data.id);
   console.log(prueba);
+  console.log(incidentList);
 
   const chartData = {
     labels: dateReport,
@@ -24,7 +26,7 @@ function DashboardCard02() {
       // Indigo line
       {
         label: 'Total',
-        data: [2, 4, 7, 1],
+        data: prueba,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
