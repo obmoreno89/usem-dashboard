@@ -61,49 +61,39 @@ function DropdownFilter({ align }) {
         leaveEnd='opacity-0'>
         <div ref={dropdown}>
           <div className='text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4'>
-            Filters
+            Filtro
           </div>
           <ul className='mb-4'>
             <li className='py-1 px-3'>
               <label className='flex items-center'>
                 <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>
-                  Direct VS Indirect
-                </span>
+                <span className='text-sm font-medium ml-2'>Accidentes</span>
+              </label>
+            </li>
+            <li className='py-1 px-3'>
+              <label className='flex items-center'>
+                <input type='checkbox' className='form-checkbox' />
+                <span className='text-sm font-medium ml-2'>Incidentes</span>
               </label>
             </li>
             <li className='py-1 px-3'>
               <label className='flex items-center'>
                 <input type='checkbox' className='form-checkbox' />
                 <span className='text-sm font-medium ml-2'>
-                  Real Time Value
+                  Top Piezas rechazadas
                 </span>
               </label>
             </li>
             <li className='py-1 px-3'>
               <label className='flex items-center'>
                 <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Top Channels</span>
+                <span className='text-sm font-medium ml-2'>Piezas OK</span>
               </label>
             </li>
             <li className='py-1 px-3'>
               <label className='flex items-center'>
                 <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>
-                  Sales VS Refunds
-                </span>
-              </label>
-            </li>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Last Order</span>
-              </label>
-            </li>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Total Spent</span>
+                <span className='text-sm font-medium ml-2'>Last Downtime</span>
               </label>
             </li>
           </ul>
@@ -111,7 +101,7 @@ function DropdownFilter({ align }) {
             <ul className='flex items-center justify-between'>
               <li>
                 <button className='btn-xs bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600'>
-                  Clear
+                  Limpiar
                 </button>
               </li>
               <li>
@@ -119,7 +109,7 @@ function DropdownFilter({ align }) {
                   className='btn-xs bg-primary hover:bg-indigo-600 text-white'
                   onClick={() => setDropdownOpen(false)}
                   onBlur={() => setDropdownOpen(false)}>
-                  Apply
+                  Aplicar
                 </button>
               </li>
             </ul>

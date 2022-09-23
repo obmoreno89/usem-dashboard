@@ -35,7 +35,7 @@ function DashboardCard01() {
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
         )}, 0.08)`,
-        borderColor: tailwindConfig().theme.colors.green[700],
+        borderColor: tailwindConfig().theme.colors.cyan[700],
         borderWidth: 2,
         tension: 0,
         pointRadius: 0,

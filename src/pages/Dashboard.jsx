@@ -12,6 +12,7 @@ import DashboardCard04 from '../partials/dashboard/DashboardCard04';
 import DashboardCard05 from '../partials/dashboard/DashboardCard05';
 import AnalyticsCard10 from '../partials/analytics/AnalyticsCard10';
 import AnalyticsCard11 from '../partials/analytics/AnalyticsCard11';
+import DashboardCard06 from '../partials/dashboard/DashboardCard06';
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -47,6 +48,8 @@ function Dashboard() {
               <DashboardCard04 />
 
               <DashboardCard05 />
+
+              <DashboardCard06 />
 
               <AnalyticsCard11 />
             </div>
