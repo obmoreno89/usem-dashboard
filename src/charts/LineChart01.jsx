@@ -43,8 +43,8 @@ function LineChart01({ data, width, height, name }) {
         },
         scales: {
           y: {
-            display: false,
-            beginAtZero: false,
+            display: true,
+            beginAtZero: true,
           },
           x: {
             type: 'time',
@@ -70,7 +70,7 @@ function LineChart01({ data, width, height, name }) {
           intersect: false,
           mode: 'nearest',
         },
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         resizeDelay: 200,
       },
     });

@@ -13,7 +13,7 @@ function DashboardCard04() {
     datasets: [
       // Indigo line
       {
-        data: [540, 466, 540],
+        data: [54, 46, 14],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -42,7 +42,7 @@ function DashboardCard04() {
           Nov 20, 2020 - Dec 19, 2020
         </div>
         <div className='flex items-start'>
-          <div className='text-3xl font-bold text-slate-800 mr-2'>8526</div>
+          <div className='text-3xl font-bold text-slate-800 mr-2'>223</div>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}

@@ -12,16 +12,25 @@ import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 function DashboardCard01() {
   const dispatch = useDispatch();
   const { accidentList } = useSelector((state) => state.accidents);
+  const { dateState } = useSelector((state) => state.state);
 
   const dateAccident = accidentList.map((data) => data.date);
+
   console.log(dateAccident);
+
+  let allReportAccidents = {};
+
+  dateAccident.forEach(
+    (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
+  );
+  const totalAccidents = Object.values(allReportAccidents);
 
   const chartData = {
     labels: dateAccident,
     datasets: [
       {
         label: 'Total',
-        data: [2, 1, 3],
+        data: totalAccidents,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -53,7 +62,7 @@ function DashboardCard01() {
           Accidentes
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          Nov 20, 2020 - Dec 19, 2020
+          {dateState ? dateState : '09-20-2022'}
         </div>
         <div className='flex items-start'>
           <p className='text-3xl font-bold text-slate-800 mr-2'>

@@ -13,7 +13,7 @@ function DashboardCard05() {
     datasets: [
       // Indigo line
       {
-        data: [540, 466, 540],
+        data: [5, 24, 3],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -43,7 +43,7 @@ function DashboardCard05() {
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
-            23 minutos
+            60 minutos
           </div>
         </div>
       </div>

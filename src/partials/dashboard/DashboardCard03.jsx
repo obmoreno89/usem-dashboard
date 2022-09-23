@@ -13,7 +13,7 @@ function DashboardCard03() {
     datasets: [
       // Indigo line
       {
-        data: [540, 466, 540],
+        data: [52, 46, 23],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]

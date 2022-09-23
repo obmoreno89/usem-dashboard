@@ -16,15 +16,19 @@ function DashboardCard02() {
 
   const dateReport = incidentList.map((data) => data.date);
 
-  const prueba = incidentList.map((data) => data.id);
+  let allReportIncidents = {};
+
+  dateReport.forEach(
+    (el) => (allReportIncidents[el] = allReportIncidents[el] + 1 || 1)
+  );
+  const totalIncidents = Object.values(allReportIncidents);
 
   const chartData = {
     labels: dateReport,
     datasets: [
-      // Indigo line
       {
         label: 'Total',
-        data: prueba,
+        data: totalIncidents,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -56,7 +60,7 @@ function DashboardCard02() {
           Incidentes
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          {dateState ? dateState : '0000-00-00'}
+          {dateState ? dateState : '09-20-2022'}
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
