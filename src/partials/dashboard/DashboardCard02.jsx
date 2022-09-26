@@ -2,29 +2,28 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import EditMenu from '../../components/DropdownEditMenu';
-import { fetchIncident } from '../../store/slices/indicents/incidentSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useGetIncidentQuery } from '../../store/apis/incidientApi';
+import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard02() {
-  const dispatch = useDispatch();
-  const { incidentList } = useSelector((state) => state.incidents);
   const { dateState } = useSelector((state) => state.state);
+  console.log(dateState);
+  const { data: incidentList = [] } = useGetIncidentQuery(dateState);
 
-  const dateReport = incidentList.map((data) => data.date);
+  const dateIncident = incidentList.map((data) => data.date);
 
   let allReportIncidents = {};
 
-  dateReport.forEach(
+  dateIncident.forEach(
     (el) => (allReportIncidents[el] = allReportIncidents[el] + 1 || 1)
   );
   const totalIncidents = Object.values(allReportIncidents);
 
   const chartData = {
-    labels: dateReport,
+    labels: dateIncident,
     datasets: [
       {
         label: 'Total',
@@ -44,10 +43,6 @@ function DashboardCard02() {
     ],
   };
 
-  useEffect(() => {
-    dispatch(fetchIncident());
-  }, []);
-
   return (
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <div className='px-5 pt-5'>
@@ -60,7 +55,7 @@ function DashboardCard02() {
           Incidentes
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          {dateState ? dateState : '09-20-2022'}
+          9
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>

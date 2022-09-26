@@ -16,8 +16,6 @@ function DashboardCard01() {
 
   const dateAccident = accidentList.map((data) => data.date);
 
-  console.log(dateAccident);
-
   let allReportAccidents = {};
 
   dateAccident.forEach(
@@ -55,7 +53,7 @@ function DashboardCard01() {
       <div className='px-5 pt-5'>
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
-          <img src={iconGraph.turrets} width='32' height='32' alt='Icon 01' />
+          <img src={iconGraph.turrets} width='32' height='32' alt='Torreta' />
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
