@@ -9,8 +9,8 @@ export const incidentApi = createApi({
 
   endpoints: (builder) => ({
     getIncident: builder.query({
-      query: (incidentDate) =>
-        `?from_date${incidentDate}&to_date=${incidentDate}`,
+      query: ({ fromDate, toDate }) =>
+        `?from_date=${fromDate}&to_date=${toDate}`,
     }),
   }),
 });

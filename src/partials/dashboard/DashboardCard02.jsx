@@ -10,8 +10,11 @@ import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard02() {
   const { dateState } = useSelector((state) => state.state);
-  console.log(dateState);
-  const { data: incidentList = [] } = useGetIncidentQuery(dateState);
+  const getFirstDate = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDate[0];
+  const toDate = getFirstDate[2];
+
+  const { data: incidentList = [] } = useGetIncidentQuery({ fromDate, toDate });
 
   const dateIncident = incidentList.map((data) => data.date);
 

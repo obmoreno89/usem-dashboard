@@ -10,7 +10,7 @@ function Datepicker({ align }) {
     mode: 'range',
     static: true,
     monthSelectorType: 'static',
-    dateFormat: 'm-d-Y',
+    dateFormat: 'Y-m-d',
     defaultDate: [new Date().setDate(new Date().getDate() - 6), new Date()],
     prevArrow:
       '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
@@ -18,7 +18,7 @@ function Datepicker({ align }) {
       '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
 
     onChange: (selectedDates, dateStr, instance) => {
-      dispatch(setState((instance.element.value = dateStr)));
+      dispatch(setState((instance.element.value = dateStr.split(' '))));
     },
   };
 
