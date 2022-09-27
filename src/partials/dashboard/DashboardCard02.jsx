@@ -14,7 +14,20 @@ function DashboardCard02() {
   const fromDate = getFirstDate[0];
   const toDate = getFirstDate[2];
 
-  const { data: incidentList = [] } = useGetIncidentQuery({ fromDate, toDate });
+  const { data: incidentList = [], error } = useGetIncidentQuery({
+    fromDate,
+    toDate,
+  });
+
+  const incidentValidation = () => {
+    if (error === undefined) {
+      return <h1>{incidentList.length}</h1>;
+    } else if (error.status === 404) {
+      return <h1>Sin datos</h1>;
+    } else {
+      return <h1>{incidentList.length}</h1>;
+    }
+  };
 
   const dateIncident = incidentList.map((data) => data.date);
 
@@ -26,11 +39,11 @@ function DashboardCard02() {
   const totalIncidents = Object.values(allReportIncidents);
 
   const chartData = {
-    labels: dateIncident,
+    labels: !error && dateIncident,
     datasets: [
       {
         label: 'Total',
-        data: totalIncidents,
+        data: !error && totalIncidents,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -58,11 +71,11 @@ function DashboardCard02() {
           Incidentes
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          9
+          {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
-            {incidentList.length}
+            {incidentValidation()}
           </div>
         </div>
       </div>
