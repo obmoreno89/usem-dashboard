@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
 import { useGetIncidentQuery } from '../../store/apis/incidientApi';
@@ -23,7 +22,7 @@ function DashboardCard02() {
     if (error === undefined) {
       return <h1>{incidentList.length}</h1>;
     } else if (error.status === 404) {
-      return <h1>Sin datos</h1>;
+      return <h1>0</h1>;
     } else {
       return <h1>{incidentList.length}</h1>;
     }

@@ -3,16 +3,36 @@ import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import EditMenu from '../../components/DropdownEditMenu';
 import iconGraph from '../../images/iconGraph';
-import { fetchAccident } from '../../store/slices/accidents/accidentsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useGetAccidentQuery } from '../../store/apis/accidentApi';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard01() {
-  const dispatch = useDispatch();
-  const { accidentList } = useSelector((state) => state.accidents);
   const { dateState } = useSelector((state) => state.state);
+  const getFirstDateAccident = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDateAccident[0];
+  const toDate = getFirstDateAccident[2];
+
+  const {
+    data: accidentList = [],
+    error,
+    success,
+  } = useGetAccidentQuery({
+    fromDate,
+    toDate,
+  });
+
+  const accidentValidation = () => {
+    if (accidentList) {
+      return <h1>{accidentList.length}</h1>;
+    } else if (success) {
+      return <h1>Sin datos</h1>;
+    } else {
+      return <h1>{setIncidentList.length}</h1>;
+    }
+  };
 
   const dateAccident = accidentList.map((data) => data.date);
 
@@ -21,14 +41,15 @@ function DashboardCard01() {
   dateAccident.forEach(
     (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
   );
-  const totalAccidents = Object.values(allReportAccidents);
+
+  const totalAccident = Object.values(allReportAccidents);
 
   const chartData = {
     labels: dateAccident,
     datasets: [
       {
         label: 'Total',
-        data: totalAccidents,
+        data: totalAccident,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -44,10 +65,6 @@ function DashboardCard01() {
     ],
   };
 
-  useEffect(() => {
-    dispatch(fetchAccident());
-  }, []);
-
   return (
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <div className='px-5 pt-5'>
@@ -60,11 +77,11 @@ function DashboardCard01() {
           Accidentes
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          {dateState ? dateState : '09-20-2022'}
+          {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
           <p className='text-3xl font-bold text-slate-800 mr-2'>
-            {accidentList.length}
+            {accidentValidation()}
           </p>
         </div>
       </div>

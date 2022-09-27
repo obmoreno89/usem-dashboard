@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import EditMenu from '../../components/DropdownEditMenu';
+import { useGetAccidentQuery } from '../../store/apis/accidentApi';
+import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
