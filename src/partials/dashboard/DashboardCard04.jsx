@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import EditMenu from '../../components/DropdownEditMenu';
-import { useGetPiecesQuery } from '../../store/apis/apiPieces';
+import { apiPieces, useGetPiecesQuery } from '../../store/apis/apiPieces';
 import { useSelector } from 'react-redux';
 
 // Import utilities
@@ -20,15 +18,13 @@ function DashboardCard04() {
     toDate,
   });
 
-  console.log(fromDate);
-
   const piecesValidation = () => {
     if (error === undefined) {
-      return <h1>{piecesList.length}</h1>;
+      return <p>{piecesList.length}</p>;
     } else if (error.status === 404) {
-      return <h1>0</h1>;
+      return <p>0</p>;
     } else {
-      return <h1>{piecesList.length}</h1>;
+      return <p>{piecesList.length}</p>;
     }
   };
 

@@ -19,11 +19,11 @@ function DashboardCard03() {
 
   const piecesValidation = () => {
     if (error === undefined) {
-      return <h1>{piecesList.length}</h1>;
+      return <p>{piecesList.length}</p>;
     } else if (error.status === 404) {
-      return <h1>0</h1>;
+      return <p>0</p>;
     } else {
-      return <h1>{piecesList.length}</h1>;
+      return <p>{piecesList.length}</p>;
     }
   };
 

@@ -26,11 +26,11 @@ function DashboardCard01() {
 
   const accidentValidation = () => {
     if (accidentList) {
-      return <h1>{accidentList.length}</h1>;
+      return <p>{accidentList.length}</p>;
     } else if (success) {
-      return <h1>Sin datos</h1>;
+      return <p>Sin datos</p>;
     } else {
-      return <h1>{setIncidentList.length}</h1>;
+      return <p>{setIncidentList.length}</p>;
     }
   };
 
@@ -80,9 +80,9 @@ function DashboardCard01() {
           {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
-          <p className='text-3xl font-bold text-slate-800 mr-2'>
+          <div className='text-3xl font-bold text-slate-800 mr-2'>
             {accidentValidation()}
-          </p>
+          </div>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}

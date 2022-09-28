@@ -20,11 +20,11 @@ function DashboardCard02() {
 
   const incidentValidation = () => {
     if (error === undefined) {
-      return <h1>{incidentList.length}</h1>;
+      return <p>{incidentList.length}</p>;
     } else if (error.status === 404) {
-      return <h1>0</h1>;
+      return <p>0</p>;
     } else {
-      return <h1>{incidentList.length}</h1>;
+      return <p>{incidentList.length}</p>;
     }
   };
 

@@ -9,7 +9,7 @@ function DashboardCard06() {
     labels: ['Piezas OK', 'Piezas rechazadas'],
     datasets: [
       {
-        label: 'Top Countries',
+        label: 'Porcentaje',
         data: [120, 95],
         backgroundColor: [
           tailwindConfig().theme.colors.cyan[800],
