@@ -1,19 +1,43 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import { useGetAccidentQuery } from '../../store/apis/accidentApi';
+import { useGetPiecesQuery } from '../../store/apis/apiPieces';
 import { useSelector } from 'react-redux';
-
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard03() {
+  const { dateState } = useSelector((state) => state.state);
+  const getFirstDate = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDate[0];
+  const toDate = getFirstDate[2];
+
+  const { data: piecesList = [], error } = useGetPiecesQuery({
+    fromDate,
+    toDate,
+  });
+
+  const piecesValidation = () => {
+    if (error === undefined) {
+      return <h1>{piecesList.length}</h1>;
+    } else if (error.status === 404) {
+      return <h1>0</h1>;
+    } else {
+      return <h1>{piecesList.length}</h1>;
+    }
+  };
+
+  const datePieces = piecesList.map((data) => data.date);
+
+  const piecesBad = piecesList.map((data) => data.is_bad);
+
   const chartData = {
-    labels: ['2022-09-15', '2022-09-16', '2022-09-17'],
+    labels: !error && datePieces,
     datasets: [
       // Indigo line
       {
-        data: [52, 46, 23],
+        label: 'Total',
+        data: piecesBad,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -41,16 +65,23 @@ function DashboardCard03() {
           Piezas rechazadas
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          Nov 20, 2020 - Dec 19, 2020
+          {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
-          <div className='text-3xl font-bold text-slate-800 mr-2'>125</div>
+          <div className='text-3xl font-bold text-slate-800 mr-2'>
+            {piecesValidation()}
+          </div>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart data={chartData} width={389} height={128} />
+        <LineChart
+          name='Rechazadas'
+          data={chartData}
+          width={389}
+          height={128}
+        />
       </div>
     </div>
   );
