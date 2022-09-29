@@ -1,8 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Transition from '../../utils/Transition';
+import { useDispatch } from 'react-redux';
+import { setLineNumber } from '../../store/slices/state/stateSlice';
 
 function DropdownFilter({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onChangeLineNumber = (e) => {
+    dispatch(setLineNumber(e.target.value));
+  };
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
@@ -66,38 +74,28 @@ function DropdownFilter({ align }) {
           <ul className='mb-4'>
             <li className='py-1 px-3'>
               <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Accidentes</span>
+                <input
+                  type='checkbox'
+                  className='form-checkbox'
+                  value='1'
+                  onChange={onChangeLineNumber}
+                />
+                <span className='text-sm font-medium ml-2'>Linea 1</span>
               </label>
             </li>
             <li className='py-1 px-3'>
               <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Incidentes</span>
-              </label>
-            </li>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>
-                  Top Piezas rechazadas
-                </span>
-              </label>
-            </li>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Piezas OK</span>
-              </label>
-            </li>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input type='checkbox' className='form-checkbox' />
-                <span className='text-sm font-medium ml-2'>Last Downtime</span>
+                <input
+                  type='checkbox'
+                  className='form-checkbox'
+                  value='2'
+                  onChange={onChangeLineNumber}
+                />
+                <span className='text-sm font-medium ml-2'>Linea 2</span>
               </label>
             </li>
           </ul>
-          <div className='py-2 px-3 border-t border-slate-200 bg-slate-50'>
+          {/* <div className='py-2 px-3 border-t border-slate-200 bg-slate-50'>
             <ul className='flex items-center justify-between'>
               <li>
                 <button className='btn-xs bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600'>
@@ -113,7 +111,7 @@ function DropdownFilter({ align }) {
                 </button>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </Transition>
     </div>
