@@ -1,7 +1,7 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import { apiPieces, useGetPiecesQuery } from '../../store/apis/apiPieces';
+import { useGetPiecesQuery } from '../../store/apis/apiPieces';
 import { useSelector } from 'react-redux';
 
 // Import utilities

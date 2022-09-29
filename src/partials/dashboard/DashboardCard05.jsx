@@ -3,17 +3,45 @@ import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
 import EditMenu from '../../components/DropdownEditMenu';
+import { useGetDowntimeQuery } from '../../store/apis/downtimeApi';
+import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard05() {
+  const { dateState, lineNumber } = useSelector((state) => state.state);
+  const getFirstDate = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDate[0];
+  const toDate = getFirstDate[2];
+
+  const { data: downtimeList = [], error } = useGetDowntimeQuery({
+    fromDate,
+    toDate,
+    lineNumber,
+  });
+
+  const downtimeValidation = () => {
+    if (error === undefined) {
+      return <p>{downtimeList.length}</p>;
+    } else if (error.status === 404) {
+      return <p>0</p>;
+    } else {
+      return <p>{downtimeList.length}</p>;
+    }
+  };
+
+  const dateDowntime = downtimeList.map((data) => data.date);
+
+  const downtimeValue = downtimeList.map((data) => data.downtime);
+
   const chartData = {
-    labels: ['2022-09-15', '2022-09-16', '2022-09-17'],
+    labels: dateDowntime,
     datasets: [
       // Indigo line
       {
-        data: [5, 24, 3],
+        label: 'Total minutos',
+        data: downtimeValue,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -39,18 +67,18 @@ function DashboardCard05() {
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>Downtime</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          Nov 20, 2020 - Dec 19, 2020
+          {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
-            60 minutos
+            {downtimeValidation()}
           </div>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart data={chartData} width={389} height={128} />
+        <LineChart name='Downtime' data={chartData} width={389} height={128} />
       </div>
     </div>
   );

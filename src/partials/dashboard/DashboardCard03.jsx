@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard03() {
-  const { dateState } = useSelector((state) => state.state);
+  const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
   const toDate = getFirstDate[2];
@@ -15,6 +15,7 @@ function DashboardCard03() {
   const { data: piecesList = [], error } = useGetPiecesQuery({
     fromDate,
     toDate,
+    lineNumber,
   });
 
   const piecesValidation = () => {

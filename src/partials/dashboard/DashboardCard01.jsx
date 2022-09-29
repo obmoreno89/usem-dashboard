@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import LineChart from '../../charts/LineChart01';
-import EditMenu from '../../components/DropdownEditMenu';
 import iconGraph from '../../images/iconGraph';
 import { useSelector } from 'react-redux';
 import { useGetAccidentQuery } from '../../store/apis/accidentApi';
@@ -42,6 +40,8 @@ function DashboardCard01() {
   dateAccident.forEach(
     (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
   );
+
+  const prueba = dateAccident.sort();
 
   const totalAccident = Object.values(allReportAccidents);
 

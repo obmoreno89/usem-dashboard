@@ -1,22 +1,22 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const apiPieces = createApi({
-  reducerPath: 'piecesData',
+export const recentRecordApi = createApi({
+  reducerPath: 'recentRecordData',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://kpi.syncronik.com/fake_api/list-production-test/',
+    baseUrl: 'http://kpi.syncronik.com/fake_api/list-first-five/',
   }),
 
   endpoints: (builder) => ({
-    getPieces: builder.query({
+    getRecentRecord: builder.query({
       query: () => `/`,
     }),
   }),
 });
 
-export const { useGetPiecesQuery } = apiPieces;
+export const { useGetRecentRecordQuery } = recentRecordApi;
 
-// getPieces: builder.query({
+// getDowntime: builder.query({
 //   query: ({ fromDate, toDate, lineNumber }) =>
 //     `?from_date=${fromDate}&to_date=${toDate}&line_number=${lineNumber}`,
 // }),

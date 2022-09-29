@@ -1,7 +1,12 @@
 import React from 'react';
 import iconGraph from '../../images/iconGraph';
+import { useGetRecentRecordQuery } from '../../store/apis/recentRecordApi';
 
 function DashboardCard07() {
+  const { data: recentRecordList = [], error } = useGetRecentRecordQuery();
+
+  console.log(recentRecordList);
+
   return (
     <div className='col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-slate-200'>
       <header className='px-5 py-4 border-b border-slate-100'>
