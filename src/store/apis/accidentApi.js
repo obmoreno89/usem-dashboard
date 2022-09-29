@@ -4,13 +4,14 @@ export const accidentApi = createApi({
   reducerPath: 'accidentData',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://kpi.syncronik.com/api/accidents/list-accident-by-date',
+    baseUrl:
+      'http://kpi.syncronik.com/api/accidents/list-accident-by-date-and-line',
   }),
 
   endpoints: (builder) => ({
     getAccident: builder.query({
-      query: ({ fromDate, toDate }) =>
-        `?from-date=${fromDate}&to-date=${toDate}`,
+      query: ({ fromDate, toDate, lineNumber }) =>
+        `?from-date=${fromDate}&to-date=${toDate}&line=${lineNumber}`,
     }),
   }),
 });

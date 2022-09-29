@@ -10,7 +10,7 @@ import { useGetAccidentQuery } from '../../store/apis/accidentApi';
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function DashboardCard01() {
-  const { dateState } = useSelector((state) => state.state);
+  const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDateAccident = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDateAccident[0];
   const toDate = getFirstDateAccident[2];
@@ -22,6 +22,7 @@ function DashboardCard01() {
   } = useGetAccidentQuery({
     fromDate,
     toDate,
+    lineNumber,
   });
 
   const accidentValidation = () => {
