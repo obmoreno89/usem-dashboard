@@ -36,12 +36,11 @@ function DashboardCard01() {
   const dateAccident = accidentList.map((data) => data.date);
 
   let allReportAccidents = {};
+  const prueba = dateAccident.sort();
 
-  dateAccident.forEach(
+  prueba.forEach(
     (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
   );
-
-  const prueba = dateAccident.sort();
 
   const totalAccident = Object.values(allReportAccidents);
 
@@ -50,7 +49,7 @@ function DashboardCard01() {
     datasets: [
       {
         label: 'Total',
-        data: totalAccident,
+        data: allReportAccidents,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
