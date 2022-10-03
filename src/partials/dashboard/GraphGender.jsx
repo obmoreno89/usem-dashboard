@@ -1,23 +1,23 @@
 import React from 'react';
-import DoughnutChart from '../../charts/DoughnutChart';
+import PolarChart from '../../charts/PolarChart';
 
 // Import utilities
-import { tailwindConfig } from '../../utils/Utils';
+import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function GraphGender() {
   const chartData = {
-    labels: ['Piezas OK', 'Piezas rechazadas'],
+    labels: ['Hombres', 'Mujeres'],
     datasets: [
       {
-        label: 'Porcentaje',
-        data: [120, 95],
+        label: 'Sessions By Gender',
+        data: [13, 8],
         backgroundColor: [
-          tailwindConfig().theme.colors.cyan[800],
-          tailwindConfig().theme.colors.cyan[600],
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.indigo[500])}, 0.8)`,
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.sky[400])}, 0.8)`,
         ],
         hoverBackgroundColor: [
-          tailwindConfig().theme.colors.yellow[600],
-          tailwindConfig().theme.colors.yellow[300],
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.indigo[600])}, 0.8)`,
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.sky[500])}, 0.8)`,
         ],
         hoverBorderColor: tailwindConfig().theme.colors.white,
       },
@@ -27,14 +27,13 @@ function GraphGender() {
   return (
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <header className='px-5 py-4 border-b border-slate-100'>
-        <h2 className='font-semibold text-slate-800'>Producción</h2>
-        <p className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          NOV 20, 2020 - DEC 19, 2020
-        </p>
+        <h2 className='font-semibold text-slate-800'>
+          Contrataciones por género
+        </h2>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
-      <DoughnutChart data={chartData} width={389} height={260} />
+      <PolarChart data={chartData} width={389} height={260} />
     </div>
   );
 }

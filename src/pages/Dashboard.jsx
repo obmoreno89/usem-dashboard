@@ -10,7 +10,7 @@ import GraphIncident from '../partials/dashboard/GraphIncident';
 import GraphBadPieces from '../partials/dashboard/GraphBadPieces';
 import GraphOkPieces from '../partials/dashboard/GraphOkPieces';
 import GraphDowntime from '../partials/dashboard/GraphDowntime';
-import AnalyticsCard11 from '../partials/analytics/AnalyticsCard11';
+import RecentRecordTable from '../partials/dashboard/RecentRecordTable';
 import GraphGender from '../partials/dashboard/GraphGender';
 import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
 import CambiarNombre01 from '../partials/dashboard/CambiarNombre01';
@@ -57,8 +57,12 @@ function Dashboard() {
 
               <CambiarNombre02 />
 
-              <AnalyticsCard11 />
+              <GraphGender />
             </div>
+
+            <section className='mt-8'>
+              <RecentRecordTable />
+            </section>
           </div>
         </main>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import iconGraph from '../../images/iconGraph';
 import { useGetRecentRecordQuery } from '../../store/apis/recentRecordApi';
 
-function DashboardCard07() {
+function RecentRecordTable() {
   const { data: recentRecordList = [], error } = useGetRecentRecordQuery();
 
   console.log(recentRecordList);
@@ -148,4 +148,4 @@ function DashboardCard07() {
   );
 }
 
-export default DashboardCard07;
+export default RecentRecordTable;

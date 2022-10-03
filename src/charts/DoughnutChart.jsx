@@ -31,17 +31,17 @@ function DoughnutChart({ data, width, height }) {
         },
         plugins: {
           legend: {
-            display: false,
+            display: true,
           },
         },
         interaction: {
-          intersect: false,
+          intersect: true,
           mode: 'nearest',
         },
         animation: {
           duration: 500,
         },
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         resizeDelay: 200,
       },
       plugins: [
