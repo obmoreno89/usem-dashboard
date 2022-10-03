@@ -7,6 +7,10 @@ import UserAvatar from '../../images/user-36-03.jpg';
 function DropdownProfile({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const logout = () => {
+    localStorage.clear();
+  };
+
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
@@ -95,7 +99,10 @@ function DropdownProfile({ align }) {
               <Link
                 className='font-medium text-sm text-black-500 hover:text-primary flex items-center py-1 px-3'
                 to='/signin'
-                onClick={() => setDropdownOpen(!dropdownOpen)}>
+                onClick={() => {
+                  setDropdownOpen(!dropdownOpen);
+                  logout();
+                }}>
                 Cerrar sesión
               </Link>
             </li>
