@@ -10,14 +10,14 @@ function GraphGender() {
     datasets: [
       {
         label: 'Sessions By Gender',
-        data: [13, 8],
+        data: [15, 17],
         backgroundColor: [
-          `rgba(${hexToRGB(tailwindConfig().theme.colors.indigo[500])}, 0.8)`,
-          `rgba(${hexToRGB(tailwindConfig().theme.colors.sky[400])}, 0.8)`,
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[700])}, 0.8)`,
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[400])}, 0.8)`,
         ],
         hoverBackgroundColor: [
-          `rgba(${hexToRGB(tailwindConfig().theme.colors.indigo[600])}, 0.8)`,
-          `rgba(${hexToRGB(tailwindConfig().theme.colors.sky[500])}, 0.8)`,
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[600])}, 0.8)`,
+          `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[500])}, 0.8)`,
         ],
         hoverBorderColor: tailwindConfig().theme.colors.white,
       },
@@ -27,9 +27,7 @@ function GraphGender() {
   return (
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <header className='px-5 py-4 border-b border-slate-100'>
-        <h2 className='font-semibold text-slate-800'>
-          Contrataciones por género
-        </h2>
+        <h2 className='font-semibold text-slate-800'>Género trabajando</h2>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
