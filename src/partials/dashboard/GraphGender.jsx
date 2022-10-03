@@ -4,7 +4,7 @@ import DoughnutChart from '../../charts/DoughnutChart';
 // Import utilities
 import { tailwindConfig } from '../../utils/Utils';
 
-function DashboardCard06() {
+function GraphGender() {
   const chartData = {
     labels: ['Piezas OK', 'Piezas rechazadas'],
     datasets: [
@@ -39,4 +39,4 @@ function DashboardCard06() {
   );
 }
 
-export default DashboardCard06;
+export default GraphGender;

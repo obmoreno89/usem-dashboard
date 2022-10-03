@@ -1,15 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import EditMenu from '../../components/DropdownEditMenu';
 import { useGetDowntimeQuery } from '../../store/apis/downtimeApi';
 import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function DashboardCard05() {
+function GraphDowntime() {
   const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -84,4 +82,4 @@ function DashboardCard05() {
   );
 }
 
-export default DashboardCard05;
+export default GraphDowntime;

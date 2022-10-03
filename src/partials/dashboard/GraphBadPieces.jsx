@@ -3,12 +3,11 @@ import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
 import { useGetPiecesQuery } from '../../store/apis/apiPieces';
 import { useSelector } from 'react-redux';
-
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function DashboardCard04() {
-  const { dateState } = useSelector((state) => state.state);
+function GraphBadPieces() {
+  const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
   const toDate = getFirstDate[2];
@@ -16,6 +15,7 @@ function DashboardCard04() {
   const { data: piecesList = [], error } = useGetPiecesQuery({
     fromDate,
     toDate,
+    lineNumber,
   });
 
   const piecesValidation = () => {
@@ -30,7 +30,7 @@ function DashboardCard04() {
 
   const datePieces = piecesList.map((data) => data.date);
 
-  const piecesOk = piecesList.map((data) => data.is_ok);
+  const piecesBad = piecesList.map((data) => data.is_bad);
 
   const chartData = {
     labels: !error && datePieces,
@@ -38,7 +38,7 @@ function DashboardCard04() {
       // Indigo line
       {
         label: 'Total',
-        data: piecesOk,
+        data: piecesBad,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -62,7 +62,9 @@ function DashboardCard04() {
           <img src={iconGraph.pieces} width='32' height='32' alt='Icon 03' />
           {/* Menu button */}
         </header>
-        <h2 className='text-lg font-semibold text-slate-800 mb-2'>Piezas OK</h2>
+        <h2 className='text-lg font-semibold text-slate-800 mb-2'>
+          Piezas rechazadas
+        </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {fromDate + ' al ' + toDate}
         </div>
@@ -75,10 +77,15 @@ function DashboardCard04() {
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart name='OK' data={chartData} width={389} height={128} />
+        <LineChart
+          name='Rechazadas'
+          data={chartData}
+          width={389}
+          height={128}
+        />
       </div>
     </div>
   );
 }
 
-export default DashboardCard04;
+export default GraphBadPieces;

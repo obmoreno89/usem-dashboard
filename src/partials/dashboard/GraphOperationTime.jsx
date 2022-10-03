@@ -1,55 +1,45 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
+import { useGetDowntimeQuery } from '../../store/apis/downtimeApi';
 import { useSelector } from 'react-redux';
-import { useGetAccidentQuery } from '../../store/apis/accidentApi';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function DashboardCard01() {
+function GraphOperationTime() {
   const { dateState, lineNumber } = useSelector((state) => state.state);
-  const getFirstDateAccident = dateState.map((firstDate) => firstDate);
-  const fromDate = getFirstDateAccident[0];
-  const toDate = getFirstDateAccident[2];
+  const getFirstDate = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDate[0];
+  const toDate = getFirstDate[2];
 
-  const {
-    data: accidentList = [],
-    error,
-    success,
-  } = useGetAccidentQuery({
+  const { data: downtimeList = [], error } = useGetDowntimeQuery({
     fromDate,
     toDate,
     lineNumber,
   });
 
-  const accidentValidation = () => {
-    if (accidentList) {
-      return <p>{accidentList.length}</p>;
-    } else if (success) {
-      return <p>Sin datos</p>;
+  const downtimeValidation = () => {
+    if (error === undefined) {
+      return <p>{downtimeList.length}</p>;
+    } else if (error.status === 404) {
+      return <p>0</p>;
     } else {
-      return <p>{setIncidentList.length}</p>;
+      return <p>{downtimeList.length}</p>;
     }
   };
 
-  const dateAccident = accidentList.map((data) => data.date);
+  const dateDowntime = downtimeList.map((data) => data.date);
 
-  let allReportAccidents = {};
-  const prueba = dateAccident.sort();
-
-  prueba.forEach(
-    (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
-  );
-
-  const totalAccident = Object.values(allReportAccidents);
+  const downtimeValue = downtimeList.map((data) => data.downtime);
 
   const chartData = {
-    labels: dateAccident,
+    labels: dateDowntime,
     datasets: [
+      // Indigo line
       {
-        label: 'Total',
-        data: allReportAccidents,
+        label: 'Total minutos',
+        data: downtimeValue,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -70,33 +60,28 @@ function DashboardCard01() {
       <div className='px-5 pt-5'>
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
-          <img src={iconGraph.turrets} width='32' height='32' alt='Torreta' />
+          <img src={iconGraph.time} width='32' height='32' alt='Icon 03' />
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
-          Accidentes
+          Operationtime
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
-            {accidentValidation()}
+            {downtimeValidation()}
           </div>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart
-          name='Accidentes'
-          data={chartData}
-          width={389}
-          height={128}
-        />
+        <LineChart name='Downtime' data={chartData} width={389} height={128} />
       </div>
     </div>
   );
 }
 
-export default DashboardCard01;
+export default GraphOperationTime;

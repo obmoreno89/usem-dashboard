@@ -1,50 +1,55 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import { useGetIncidentQuery } from '../../store/apis/incidientApi';
 import { useSelector } from 'react-redux';
+import { useGetAccidentQuery } from '../../store/apis/accidentApi';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function DashboardCard02() {
+function GraphAccident() {
   const { dateState, lineNumber } = useSelector((state) => state.state);
-  const getFirstDate = dateState.map((firstDate) => firstDate);
-  const fromDate = getFirstDate[0];
-  const toDate = getFirstDate[2];
+  const getFirstDateAccident = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDateAccident[0];
+  const toDate = getFirstDateAccident[2];
 
-  const { data: incidentList = [], error } = useGetIncidentQuery({
+  const {
+    data: accidentList = [],
+    error,
+    success,
+  } = useGetAccidentQuery({
     fromDate,
     toDate,
     lineNumber,
   });
 
-  const incidentValidation = () => {
-    if (error === undefined) {
-      return <p>{incidentList.length}</p>;
-    } else if (error.status === 404) {
-      return <p>0</p>;
+  const accidentValidation = () => {
+    if (accidentList) {
+      return <p>{accidentList.length}</p>;
+    } else if (success) {
+      return <p>Sin datos</p>;
     } else {
-      return <p>{incidentList.length}</p>;
+      return <p>{setIncidentList.length}</p>;
     }
   };
 
-  const dateIncident = incidentList.map((data) => data.date);
+  const dateAccident = accidentList.map((data) => data.date);
 
-  let allReportIncidents = {};
-  const prueba = dateIncident.sort();
+  let allReportAccidents = {};
+  const prueba = dateAccident.sort();
 
   prueba.forEach(
-    (el) => (allReportIncidents[el] = allReportIncidents[el] + 1 || 1)
+    (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
   );
-  const totalIncidents = Object.values(allReportIncidents);
+
+  const totalAccident = Object.values(allReportAccidents);
 
   const chartData = {
-    labels: !error && dateIncident,
+    labels: dateAccident,
     datasets: [
       {
         label: 'Total',
-        data: !error && allReportIncidents,
+        data: allReportAccidents,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -65,18 +70,18 @@ function DashboardCard02() {
       <div className='px-5 pt-5'>
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
-          <img src={iconGraph.alert} width='32' height='32' alt='Icon 02' />
+          <img src={iconGraph.turrets} width='32' height='32' alt='Torreta' />
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
-          Incidentes
+          Accidentes
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
-            {incidentValidation()}
+            {accidentValidation()}
           </div>
         </div>
       </div>
@@ -84,7 +89,7 @@ function DashboardCard02() {
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
         <LineChart
-          name='Incidentes'
+          name='Accidentes'
           data={chartData}
           width={389}
           height={128}
@@ -94,4 +99,4 @@ function DashboardCard02() {
   );
 }
 
-export default DashboardCard02;
+export default GraphAccident;

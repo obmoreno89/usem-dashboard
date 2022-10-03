@@ -5,14 +5,16 @@ import Header from '../partials/Header';
 import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
 import DropdownFilter from '../partials/dashboard/DropdownFilter';
 import Datepicker from '../partials/dashboard/Datepicker';
-import DashboardCard01 from '../partials/dashboard/DashboardCard01';
-import DashboardCard02 from '../partials/dashboard/DashboardCard02';
-import DashboardCard03 from '../partials/dashboard/DashboardCard03';
-import DashboardCard04 from '../partials/dashboard/DashboardCard04';
-import DashboardCard05 from '../partials/dashboard/DashboardCard05';
-import AnalyticsCard10 from '../partials/analytics/AnalyticsCard10';
+import GraphAccident from '../partials/dashboard/GraphAccident';
+import GraphIncident from '../partials/dashboard/GraphIncident';
+import GraphBadPieces from '../partials/dashboard/GraphBadPieces';
+import GraphOkPieces from '../partials/dashboard/GraphOkPieces';
+import GraphDowntime from '../partials/dashboard/GraphDowntime';
 import AnalyticsCard11 from '../partials/analytics/AnalyticsCard11';
-import DashboardCard06 from '../partials/dashboard/DashboardCard06';
+import GraphGender from '../partials/dashboard/GraphGender';
+import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
+import CambiarNombre01 from '../partials/dashboard/CambiarNombre01';
+import CambiarNombre02 from '../partials/dashboard/CambiarNombre02';
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -39,17 +41,21 @@ function Dashboard() {
               </div>
             </div>
             <div className='grid grid-cols-12 gap-6'>
-              <DashboardCard01 />
+              <GraphAccident />
 
-              <DashboardCard02 />
+              <GraphIncident />
 
-              <DashboardCard03 />
+              <GraphBadPieces />
 
-              <DashboardCard04 />
+              <GraphOkPieces />
 
-              <DashboardCard05 />
+              <GraphDowntime />
 
-              <DashboardCard06 />
+              <GraphOperationTime />
+
+              <CambiarNombre01 />
+
+              <CambiarNombre02 />
 
               <AnalyticsCard11 />
             </div>
