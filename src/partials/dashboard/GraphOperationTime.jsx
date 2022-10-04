@@ -66,7 +66,7 @@ function GraphOperationTime() {
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
-          Operationtime
+          Operation Time
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {fromDate + ' al ' + toDate}
