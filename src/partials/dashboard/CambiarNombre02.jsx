@@ -66,7 +66,7 @@ function CambiarNombre02() {
       <div className='px-5 pt-5'>
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
-          <img src={iconGraph.time} width='32' height='32' alt='Icon 03' />
+          <img src={iconGraph.rework} width='32' height='32' alt='Icon 03' />
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>ReWork</h2>
