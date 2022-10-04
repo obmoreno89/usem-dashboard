@@ -39,13 +39,13 @@ function CambiarNombre02() {
       '2022-09-07',
       '2022-09-10',
       '2022-09-20',
-      '2022-09-29',
+      '2022-09-26',
     ],
     datasets: [
       // Indigo line
       {
         label: 'Total',
-        data: [120, 89, 156, 30, 78],
+        data: [120, 89, 156, 30, 54],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
