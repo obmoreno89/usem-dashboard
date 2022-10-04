@@ -1,7 +1,7 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
-import { useGetDowntimeQuery } from '../../store/apis/downtimeApi';
+import { useGetOperationTimeQuery } from '../../store/apis/operationTimeApi';
 import { useSelector } from 'react-redux';
 
 // Import utilities
@@ -13,35 +13,37 @@ function GraphOperationTime() {
   const fromDate = getFirstDate[0];
   const toDate = getFirstDate[2];
 
-  const { data: downtimeList = [], error } = useGetDowntimeQuery({
+  const { data: operationTimeList = [], error } = useGetOperationTimeQuery({
     fromDate,
     toDate,
     lineNumber,
   });
 
-  const downtimeValidation = () => {
+  const operationTimeValidation = () => {
     if (error === undefined) {
-      return <p>{downtimeList.length}</p>;
+      return <p>{operationTimeList.length}</p>;
     } else if (error.status === 404) {
       return <p>0</p>;
     } else {
-      return <p>{downtimeList.length}</p>;
+      return <p>{operationTimeList.length}</p>;
     }
   };
 
-  const dateDowntime = downtimeList.map((data) => data.date);
+  const dateOperationTime = operationTimeList.map((data) => data.date);
 
-  const downtimeValue = downtimeList.map((data) => data.downtime);
+  const operationTimeValue = operationTimeList.map(
+    (data) => data.operation_time.minutes
+  );
 
-  console.log(dateDowntime);
+  console.log(operationTimeList);
 
   const chartData = {
-    labels: dateDowntime,
+    labels: dateOperationTime,
     datasets: [
       // Indigo line
       {
         label: 'Total minutos',
-        data: [20, 50, 32, 12, 15, 60, 23, 11, 27],
+        data: operationTimeValue,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -73,7 +75,7 @@ function GraphOperationTime() {
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>
-            {downtimeValidation()}
+            {operationTimeValidation()}
           </div>
         </div>
       </div>
@@ -81,7 +83,7 @@ function GraphOperationTime() {
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
         <LineChart
-          name='Operationtime'
+          name='Operation time'
           data={chartData}
           width={389}
           height={128}
