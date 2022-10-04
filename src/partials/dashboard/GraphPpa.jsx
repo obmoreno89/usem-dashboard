@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function CambiarNombre01() {
+function GraphPpa() {
   const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -36,7 +36,6 @@ function CambiarNombre01() {
   const chartData = {
     labels: ['2022-09-06', '2022-09-07', '2022-09-10'],
     datasets: [
-      // Indigo line
       {
         label: 'Total',
         data: [120, 89, 156],
@@ -80,4 +79,4 @@ function CambiarNombre01() {
   );
 }
 
-export default CambiarNombre01;
+export default GraphPpa;

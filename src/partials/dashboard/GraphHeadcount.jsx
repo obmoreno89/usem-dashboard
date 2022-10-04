@@ -4,7 +4,7 @@ import PolarChart from '../../charts/PolarChart';
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphGender() {
+function GraphHeadcount() {
   const chartData = {
     labels: ['Hombres', 'Mujeres'],
     datasets: [
@@ -39,4 +39,4 @@ function GraphGender() {
   );
 }
 
-export default GraphGender;
+export default GraphHeadcount;

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function CambiarNombre02() {
+function GraphReWork() {
   const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -86,4 +86,4 @@ function CambiarNombre02() {
   );
 }
 
-export default CambiarNombre02;
+export default GraphReWork;

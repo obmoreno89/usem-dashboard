@@ -11,10 +11,10 @@ import GraphBadPieces from '../partials/dashboard/GraphBadPieces';
 import GraphOkPieces from '../partials/dashboard/GraphOkPieces';
 import GraphDowntime from '../partials/dashboard/GraphDowntime';
 import RecentRecordTable from '../partials/dashboard/RecentRecordTable';
-import GraphGender from '../partials/dashboard/GraphGender';
+import GraphHeadcount from '../partials/dashboard/GraphHeadcount';
 import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
-import CambiarNombre01 from '../partials/dashboard/CambiarNombre01';
-import CambiarNombre02 from '../partials/dashboard/CambiarNombre02';
+import GraphPpa from '../partials/dashboard/GraphPpa';
+import GraphReWork from '../partials/dashboard/GraphReWork';
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -53,11 +53,11 @@ function Dashboard() {
 
               <GraphOperationTime />
 
-              <CambiarNombre01 />
+              <GraphPpa />
 
-              <CambiarNombre02 />
+              <GraphReWork />
 
-              <GraphGender />
+              <GraphHeadcount />
             </div>
 
             <section className='mt-8'>

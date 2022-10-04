@@ -35,12 +35,9 @@ function GraphOperationTime() {
     (data) => data.operation_time.minutes
   );
 
-  console.log(operationTimeList);
-
   const chartData = {
     labels: dateOperationTime,
     datasets: [
-      // Indigo line
       {
         label: 'Total minutos',
         data: operationTimeValue,
