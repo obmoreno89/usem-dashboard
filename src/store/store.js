@@ -7,6 +7,7 @@ import { accidentApi } from './apis/accidentApi';
 import { apiPieces } from './apis/apiPieces';
 import { downtimeApi } from './apis/downtimeApi';
 import { recentRecordApi } from './apis/recentRecordApi';
+import { operationTimeApi } from './apis/operationTimeApi';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [apiPieces.reducerPath]: apiPieces.reducer,
     [downtimeApi.reducerPath]: downtimeApi.reducer,
     [recentRecordApi.reducerPath]: recentRecordApi.reducer,
+    [operationTimeApi.reducerPath]: operationTimeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(incidentApi.middleware),
@@ -29,4 +31,6 @@ export const store = configureStore({
     getDefaultMiddleware().concat(downtimeApi.middleware),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(recentRecordApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(operationTimeApi.middleware),
 });

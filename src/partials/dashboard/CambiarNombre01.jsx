@@ -34,12 +34,12 @@ function CambiarNombre01() {
   const downtimeValue = downtimeList.map((data) => data.downtime);
 
   const chartData = {
-    labels: dateDowntime,
+    labels: ['2022-09-06', '2022-09-07', '2022-09-10'],
     datasets: [
       // Indigo line
       {
-        label: 'Total minutos',
-        data: downtimeValue,
+        label: 'Total',
+        data: [120, 89, 156],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -63,22 +63,18 @@ function CambiarNombre01() {
           <img src={iconGraph.time} width='32' height='32' alt='Icon 03' />
           {/* Menu button */}
         </header>
-        <h2 className='text-lg font-semibold text-slate-800 mb-2'>
-          Cambiar nombre
-        </h2>
+        <h2 className='text-lg font-semibold text-slate-800 mb-2'>PPA</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {fromDate + ' al ' + toDate}
         </div>
         <div className='flex items-start'>
-          <div className='text-3xl font-bold text-slate-800 mr-2'>
-            {downtimeValidation()}
-          </div>
+          <div className='text-3xl font-bold text-slate-800 mr-2'>3</div>
         </div>
       </div>
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart name='Downtime' data={chartData} width={389} height={128} />
+        <LineChart name='PPA' data={chartData} width={389} height={128} />
       </div>
     </div>
   );
