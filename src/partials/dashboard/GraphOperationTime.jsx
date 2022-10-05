@@ -40,11 +40,11 @@ function GraphOperationTime() {
   );
 
   const chartData = {
-    labels: dateOperationTime,
+    labels: !error && dateOperationTime,
     datasets: [
       {
         label: 'Total minutos',
-        data: operationTimeValue,
+        data: !error && operationTimeValue,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -59,7 +59,7 @@ function GraphOperationTime() {
       },
       {
         label: 'Total horas',
-        data: operationTimeHours,
+        data: !error && operationTimeHours,
         borderColor: tailwindConfig().theme.colors.slate[300],
         borderWidth: 2,
         tension: 0,

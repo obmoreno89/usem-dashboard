@@ -34,12 +34,12 @@ function GraphDowntime() {
   const downtimeValue = downtimeList.map((data) => data.downtime);
 
   const chartData = {
-    labels: dateDowntime,
+    labels: !error && dateDowntime,
     datasets: [
       // Indigo line
       {
         label: 'Total minutos',
-        data: downtimeValue,
+        data: !error && downtimeValue,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]

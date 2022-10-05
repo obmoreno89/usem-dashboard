@@ -112,7 +112,7 @@ function PolarChart({ data, width, height, name }) {
     });
     return () => chart.destroy();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <div className='grow flex flex-col justify-center'>

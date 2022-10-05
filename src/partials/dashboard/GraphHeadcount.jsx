@@ -16,14 +16,13 @@ function GraphHeadcount() {
     lineNumber,
   });
 
-  const manPercentage = headcountList.men;
-  const womanPercentage = headcountList.women;
+  const genderPercentage = [headcountList.men, headcountList.women];
 
   const chartData = {
     labels: ['Hombres', 'Mujeres'],
     datasets: [
       {
-        data: [manPercentage, womanPercentage],
+        data: genderPercentage,
         backgroundColor: [
           `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[700])}, 0.8)`,
           `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[400])}, 0.8)`,
