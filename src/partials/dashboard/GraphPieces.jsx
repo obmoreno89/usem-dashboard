@@ -3,11 +3,10 @@ import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
 import { useGetPiecesQuery } from '../../store/apis/apiPieces';
 import { useSelector } from 'react-redux';
-
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphOkPieces() {
+function GraphPieces() {
   const { dateState } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -30,6 +29,8 @@ function GraphOkPieces() {
 
   const datePieces = piecesList.map((data) => data.date);
 
+  const piecesBad = piecesList.map((data) => data.is_bad);
+
   const piecesOk = piecesList.map((data) => data.is_ok);
 
   const chartData = {
@@ -37,8 +38,8 @@ function GraphOkPieces() {
     datasets: [
       // Indigo line
       {
-        label: 'Total',
-        data: piecesOk,
+        label: 'Rechazadas',
+        data: !error && piecesBad,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -49,6 +50,17 @@ function GraphOkPieces() {
         pointRadius: 0,
         pointHoverRadius: 3,
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
+        clip: 20,
+      },
+      {
+        label: 'OK',
+        data: !error && piecesOk,
+        borderColor: tailwindConfig().theme.colors.slate[300],
+        borderWidth: 2,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
         clip: 20,
       },
     ],
@@ -62,7 +74,9 @@ function GraphOkPieces() {
           <img src={iconGraph.pieces} width='32' height='32' alt='Icon 03' />
           {/* Menu button */}
         </header>
-        <h2 className='text-lg font-semibold text-slate-800 mb-2'>Piezas OK</h2>
+        <h2 className='text-lg font-semibold text-slate-800 mb-2'>
+          Piezas OK y Rechazadas
+        </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {fromDate + ' al ' + toDate}
         </div>
@@ -75,10 +89,10 @@ function GraphOkPieces() {
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart name='OK' data={chartData} width={389} height={128} />
+        <LineChart name='Piezas' data={chartData} width={389} height={128} />
       </div>
     </div>
   );
 }
 
-export default GraphOkPieces;
+export default GraphPieces;

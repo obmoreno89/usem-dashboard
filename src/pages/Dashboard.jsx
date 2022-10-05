@@ -7,8 +7,7 @@ import DropdownFilter from '../partials/dashboard/DropdownFilter';
 import Datepicker from '../partials/dashboard/Datepicker';
 import GraphAccident from '../partials/dashboard/GraphAccident';
 import GraphIncident from '../partials/dashboard/GraphIncident';
-import GraphBadPieces from '../partials/dashboard/GraphBadPieces';
-import GraphOkPieces from '../partials/dashboard/GraphOkPieces';
+import GraphPieces from '../partials/dashboard/GraphPieces';
 import GraphDowntime from '../partials/dashboard/GraphDowntime';
 import RecentRecordTable from '../partials/dashboard/RecentRecordTable';
 import GraphHeadcount from '../partials/dashboard/GraphHeadcount';
@@ -45,9 +44,7 @@ function Dashboard() {
 
               <GraphIncident />
 
-              <GraphBadPieces />
-
-              <GraphOkPieces />
+              <GraphPieces />
 
               <GraphDowntime />
 
