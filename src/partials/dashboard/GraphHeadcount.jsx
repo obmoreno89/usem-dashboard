@@ -1,16 +1,31 @@
 import React from 'react';
 import PolarChart from '../../charts/PolarChart';
+import { useGetHeadcountQuery } from '../../store/apis/headcountApi';
+import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function GraphHeadcount() {
+  const { dateState, lineNumber } = useSelector((state) => state.state);
+  const getFirstDate = dateState.map((firstDate) => firstDate);
+  const fromDate = getFirstDate[0];
+  const toDate = getFirstDate[2];
+
+  const { data: headcountList = [], error } = useGetHeadcountQuery({
+    fromDate,
+    toDate,
+    lineNumber,
+  });
+
+  const manPercentage = headcountList.men;
+  const womanPercentage = headcountList.women;
+
   const chartData = {
     labels: ['Hombres', 'Mujeres'],
     datasets: [
       {
-        label: 'Sessions By Gender',
-        data: [15, 17],
+        data: [10, 12],
         backgroundColor: [
           `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[700])}, 0.8)`,
           `rgba(${hexToRGB(tailwindConfig().theme.colors.cyan[400])}, 0.8)`,
@@ -29,12 +44,12 @@ function GraphHeadcount() {
       <header className='px-5 py-4 border-b border-slate-100'>
         <h2 className='font-semibold text-slate-800'>Headcount</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          2022-09-01 a 20-09-30
+          {fromDate + ' al ' + toDate}
         </div>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
-      <PolarChart data={chartData} width={389} height={260} />
+      <PolarChart name='Porcentaje' data={chartData} width={389} height={260} />
     </div>
   );
 }

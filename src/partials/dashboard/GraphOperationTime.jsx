@@ -34,13 +34,16 @@ function GraphOperationTime() {
   const operationTimeValue = operationTimeList.map(
     (data) => data.operation_time.minutes
   );
+  const operationTimeHours = operationTimeList.map(
+    (data) => data.operation_time.hours
+  );
 
   const chartData = {
-    labels: dateOperationTime,
+    labels: ['2022-09-05', '2022-09-09', '2022-09-12'],
     datasets: [
       {
         label: 'Total minutos',
-        data: operationTimeValue,
+        data: [50, 32, 15],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -51,6 +54,17 @@ function GraphOperationTime() {
         pointRadius: 0,
         pointHoverRadius: 3,
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
+        clip: 20,
+      },
+      {
+        label: 'Total horas',
+        data: [2, 6, 7],
+        borderColor: tailwindConfig().theme.colors.slate[300],
+        borderWidth: 2,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
         clip: 20,
       },
     ],
