@@ -5,6 +5,7 @@ import { setLineNumber } from '../../store/slices/state/stateSlice';
 
 function DropdownFilter({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [lineNumberData, setLineNumberData] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -41,6 +42,16 @@ function DropdownFilter({ align }) {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const getLineNumber = () => {
+    fetch('http://kpi.syncronik.com/api/accidents/list-line-number')
+      .then((response) => response.json())
+      .then((json) => setLineNumberData(json));
+  };
+
+  useEffect(() => {
+    getLineNumber();
+  }, []);
+
   return (
     <div className='relative inline-flex'>
       <button
@@ -69,31 +80,24 @@ function DropdownFilter({ align }) {
         leaveEnd='opacity-0'>
         <div ref={dropdown}>
           <div className='text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4'>
-            Filtro
+            Filtrar numero de linea
           </div>
           <ul className='mb-4'>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input
-                  type='checkbox'
-                  className='form-checkbox'
-                  value='1'
-                  onChange={onChangeLineNumber}
-                />
-                <span className='text-sm font-medium ml-2'>Linea 1</span>
-              </label>
-            </li>
-            <li className='py-1 px-3'>
-              <label className='flex items-center'>
-                <input
-                  type='checkbox'
-                  className='form-checkbox'
-                  value='2'
-                  onChange={onChangeLineNumber}
-                />
-                <span className='text-sm font-medium ml-2'>Linea 2</span>
-              </label>
-            </li>
+            {lineNumberData.map((lineNumber) => (
+              <li className='py-1 px-3' key={lineNumber.id}>
+                <label className='flex items-center'>
+                  <input
+                    type='checkbox'
+                    className='form-checkbox'
+                    value={lineNumber.id}
+                    onChange={onChangeLineNumber}
+                  />
+                  <span className='text-sm font-medium ml-2'>
+                    {lineNumber.name}
+                  </span>
+                </label>
+              </li>
+            ))}
           </ul>
           {/* <div className='py-2 px-3 border-t border-slate-200 bg-slate-50'>
             <ul className='flex items-center justify-between'>

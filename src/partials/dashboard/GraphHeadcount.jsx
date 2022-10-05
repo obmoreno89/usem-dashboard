@@ -13,8 +13,6 @@ function GraphHeadcount() {
   const toDate = getFirstDate[2];
 
   const { data: headcountList = [], error } = useGetHeadcountQuery({
-    fromDate,
-    toDate,
     lineNumber,
   });
 
