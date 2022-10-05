@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Transition from '../../utils/Transition';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLineNumber } from '../../store/slices/state/stateSlice';
 
 function DropdownFilter({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [lineNumberData, setLineNumberData] = useState([]);
+  // const [lineNumberData, setLineNumberData] = useState([]);
+
+  const { lineNumber } = useSelector((state) => state.state);
 
   const dispatch = useDispatch();
 
@@ -42,15 +44,15 @@ function DropdownFilter({ align }) {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  const getLineNumber = () => {
-    fetch('http://kpi.syncronik.com/api/accidents/list-line-number')
-      .then((response) => response.json())
-      .then((json) => setLineNumberData(json));
-  };
+  // const getLineNumber = () => {
+  //   fetch('http://kpi.syncronik.com/api/accidents/list-line-number')
+  //     .then((response) => response.json())
+  //     .then((json) => setLineNumberData(json));
+  // };
 
-  useEffect(() => {
-    getLineNumber();
-  }, []);
+  // useEffect(() => {
+  //   getLineNumber();
+  // }, []);
 
   return (
     <div className='relative inline-flex'>
@@ -83,21 +85,54 @@ function DropdownFilter({ align }) {
             Filtrar numero de linea
           </div>
           <ul className='mb-4'>
-            {lineNumberData.map((lineNumber) => (
-              <li className='py-1 px-3' key={lineNumber.id}>
-                <label className='flex items-center'>
-                  <input
-                    type='checkbox'
-                    className='form-checkbox'
-                    value={lineNumber.id}
-                    onChange={onChangeLineNumber}
-                  />
-                  <span className='text-sm font-medium ml-2'>
-                    {lineNumber.name}
-                  </span>
-                </label>
-              </li>
-            ))}
+            <li className='py-1 px-3'>
+              <label className='flex items-center'>
+                <input
+                  type='radio'
+                  className='form-checkbox'
+                  value='1'
+                  onChange={onChangeLineNumber}
+                  checked={lineNumber == 1 ? true : false}
+                />
+                <span className='text-sm font-medium ml-2'>U</span>
+              </label>
+            </li>
+            <li className='py-1 px-3'>
+              <label className='flex items-center'>
+                <input
+                  type='radio'
+                  className='form-checkbox'
+                  value='2'
+                  onChange={onChangeLineNumber}
+                  checked={lineNumber == 2 ? true : false}
+                />
+                <span className='text-sm font-medium ml-2'>G.MENA</span>
+              </label>
+            </li>
+            <li className='py-1 px-3'>
+              <label className='flex items-center'>
+                <input
+                  type='radio'
+                  className='form-checkbox'
+                  value='3'
+                  onChange={onChangeLineNumber}
+                  checked={lineNumber == 3 ? true : false}
+                />
+                <span className='text-sm font-medium ml-2'>MFL</span>
+              </label>
+            </li>
+            <li className='py-1 px-3'>
+              <label className='flex items-center'>
+                <input
+                  type='radio'
+                  className='form-checkbox'
+                  value='4'
+                  onChange={onChangeLineNumber}
+                  checked={lineNumber == 4 ? true : false}
+                />
+                <span className='text-sm font-medium ml-2'>LFL</span>
+              </label>
+            </li>
           </ul>
           {/* <div className='py-2 px-3 border-t border-slate-200 bg-slate-50'>
             <ul className='flex items-center justify-between'>
