@@ -9,7 +9,7 @@ export const headcountApi = createApi({
 
   endpoints: (builder) => ({
     getHeadcount: builder.query({
-      query: () => `?line_number=1`,
+      query: ({ lineNumber }) => `?line_number=${lineNumber}`,
     }),
   }),
 });

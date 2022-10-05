@@ -35,6 +35,10 @@ function GraphOperationTime() {
     (data) => data.operation_time.minutes
   );
 
+  const operationTimeHours = operationTimeList.map(
+    (data) => data.operation_time.hours
+  );
+
   const chartData = {
     labels: dateOperationTime,
     datasets: [
@@ -51,6 +55,17 @@ function GraphOperationTime() {
         pointRadius: 0,
         pointHoverRadius: 3,
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
+        clip: 20,
+      },
+      {
+        label: 'Total horas',
+        data: operationTimeHours,
+        borderColor: tailwindConfig().theme.colors.slate[300],
+        borderWidth: 2,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
         clip: 20,
       },
     ],

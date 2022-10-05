@@ -9,7 +9,8 @@ export const operationTimeApi = createApi({
 
   endpoints: (builder) => ({
     getOperationTime: builder.query({
-      query: () => `?line_number=3`,
+      query: ({ fromDate, toDate, lineNumber }) =>
+        `?from_date=${fromDate}&to_date=${toDate}&line_number=${lineNumber}`,
     }),
   }),
 });
