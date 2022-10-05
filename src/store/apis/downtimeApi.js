@@ -4,20 +4,15 @@ export const downtimeApi = createApi({
   reducerPath: 'downtimeData',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://kpi.syncronik.com/fake_api/list-downtime-test/',
+    baseUrl: 'http://kpi.syncronik.com/api/downtime/lines/',
   }),
 
   endpoints: (builder) => ({
     getDowntime: builder.query({
-      query: () => `/`,
+      query: ({ fromDate, toDate, lineNumber }) =>
+        `?from_date=${fromDate}&to_date=${toDate}&line_number=${lineNumber}`,
     }),
   }),
 });
 
 export const { useGetDowntimeQuery } = downtimeApi;
-
-// getDowntime: builder.query({
-//   query: ({ fromDate, toDate, lineNumber }) =>
-//     `?from_date=${fromDate}&to_date=${toDate}&line_number=${lineNumber}`,
-// }),
-// }),
