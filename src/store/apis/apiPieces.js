@@ -4,20 +4,15 @@ export const apiPieces = createApi({
   reducerPath: 'piecesData',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://kpi.syncronik.com/fake_api/list-production-test/',
+    baseUrl: 'http://kpi.syncronik.com/api/pieces/production-kpi/',
   }),
 
   endpoints: (builder) => ({
     getPieces: builder.query({
-      query: () => `/`,
+      query: ({ fromDate, toDate }) =>
+        `?from_date=${fromDate}&to_date=${toDate}`,
     }),
   }),
 });
 
 export const { useGetPiecesQuery } = apiPieces;
-
-// getPieces: builder.query({
-//   query: ({ fromDate, toDate, lineNumber }) =>
-//     `?from_date=${fromDate}&to_date=${toDate}&line_number=${lineNumber}`,
-// }),
-// }),

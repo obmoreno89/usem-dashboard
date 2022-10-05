@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function GraphBadPieces() {
-  const { dateState, lineNumber } = useSelector((state) => state.state);
+  const { dateState } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
   const toDate = getFirstDate[2];
@@ -15,7 +15,6 @@ function GraphBadPieces() {
   const { data: piecesList = [], error } = useGetPiecesQuery({
     fromDate,
     toDate,
-    lineNumber,
   });
 
   const piecesValidation = () => {
