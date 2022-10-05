@@ -8,6 +8,7 @@ import { apiPieces } from './apis/apiPieces';
 import { downtimeApi } from './apis/downtimeApi';
 import { recentRecordApi } from './apis/recentRecordApi';
 import { operationTimeApi } from './apis/operationTimeApi';
+import { headcountApi } from './apis/headcountApi';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [downtimeApi.reducerPath]: downtimeApi.reducer,
     [recentRecordApi.reducerPath]: recentRecordApi.reducer,
     [operationTimeApi.reducerPath]: operationTimeApi.reducer,
+    [headcountApi.reducerPath]: headcountApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(incidentApi.middleware),
@@ -33,4 +35,6 @@ export const store = configureStore({
     getDefaultMiddleware().concat(recentRecordApi.middleware),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(operationTimeApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(headcountApi.middleware),
 });

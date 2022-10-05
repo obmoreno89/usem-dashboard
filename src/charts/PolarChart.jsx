@@ -21,7 +21,7 @@ Chart.register(
   ArcElement
 );
 
-function PolarChart({ data, width, height }) {
+function PolarChart({ data, width, height, name }) {
   const canvas = useRef(null);
   const legend = useRef(null);
 
@@ -38,6 +38,12 @@ function PolarChart({ data, width, height }) {
         plugins: {
           legend: {
             display: false,
+          },
+          tooltip: {
+            callbacks: {
+              title: () => name, // Disable tooltip title
+              // label: (context) => formatValue(context.parsed.y),
+            },
           },
         },
         interaction: {
