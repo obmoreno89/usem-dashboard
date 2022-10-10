@@ -65,7 +65,7 @@ function GraphDowntime() {
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>Downtime</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          {fromDate + ' al ' + toDate}
+          {dateState.join(' ')}
         </div>
         <div className='flex items-start'>
           <div className='text-3xl font-bold text-slate-800 mr-2'>

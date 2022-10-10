@@ -41,7 +41,7 @@ function GraphHeadcount() {
       <header className='px-5 py-4 border-b border-slate-100'>
         <h2 className='font-semibold text-slate-800'>Headcount</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
-          {fromDate + ' al ' + toDate}
+          {dateState.join(' ')}
         </div>
       </header>
       {/* Chart built with Chart.js 3 */}
