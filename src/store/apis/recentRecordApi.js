@@ -6,6 +6,11 @@ export const recentRecordApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://kpi.syncronik.com/fake_api/list-first-five/',
   }),
+  keepUnusedDataFor: 60,
+  refetchOnMountOrArgChange: true,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
+  pollingInterval: 3000,
 
   endpoints: (builder) => ({
     getRecentRecord: builder.query({

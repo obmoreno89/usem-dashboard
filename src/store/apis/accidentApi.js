@@ -7,6 +7,11 @@ export const accidentApi = createApi({
     baseUrl:
       'http://kpi.syncronik.com/api/accidents/list-accident-by-date-and-line',
   }),
+  keepUnusedDataFor: 60,
+  refetchOnMountOrArgChange: true,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
+  pollingInterval: 3000,
 
   endpoints: (builder) => ({
     getAccident: builder.query({

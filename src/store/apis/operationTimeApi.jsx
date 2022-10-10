@@ -6,6 +6,11 @@ export const operationTimeApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://kpi.syncronik.com/api/operation-time/lines/',
   }),
+  keepUnusedDataFor: 60,
+  refetchOnMountOrArgChange: true,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
+  pollingInterval: 3000,
 
   endpoints: (builder) => ({
     getOperationTime: builder.query({
