@@ -24,17 +24,13 @@ export const store = configureStore({
     [headcountApi.reducerPath]: headcountApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(incidentApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(accidentApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiPieces.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(downtimeApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(recentRecordApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(operationTimeApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(headcountApi.middleware),
+    getDefaultMiddleware().concat([
+      incidentApi.middleware,
+      accidentApi.middleware,
+      apiPieces.middleware,
+      downtimeApi.middleware,
+      recentRecordApi.middleware,
+      operationTimeApi.middleware,
+      headcountApi.middleware,
+    ]),
 });
