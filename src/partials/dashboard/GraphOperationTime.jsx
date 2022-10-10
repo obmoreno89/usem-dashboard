@@ -43,7 +43,7 @@ function GraphOperationTime() {
     labels: !error && dateOperationTime,
     datasets: [
       {
-        label: 'Total minutos',
+        label: 'Total de minutos',
         data: !error && operationTimeValue,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
@@ -58,7 +58,7 @@ function GraphOperationTime() {
         clip: 20,
       },
       {
-        label: 'Total horas',
+        label: 'Total de horas',
         data: !error && operationTimeHours,
         borderColor: tailwindConfig().theme.colors.slate[300],
         borderWidth: 2,

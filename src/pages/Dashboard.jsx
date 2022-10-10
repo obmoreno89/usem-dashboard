@@ -50,9 +50,9 @@ function Dashboard() {
 
               <GraphOperationTime />
 
-              <GraphPpa />
+              {/* <GraphPpa />
 
-              <GraphReWork />
+              <GraphReWork /> */}
 
               <GraphHeadcount />
             </div>
