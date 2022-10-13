@@ -43,8 +43,8 @@ function GraphOperationTime() {
     labels: !error && dateOperationTime,
     datasets: [
       {
-        label: 'Total de minutos',
-        data: !error && operationTimeValue,
+        label: 'Total de Horas',
+        data: !error && operationTimeHours,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -57,17 +57,17 @@ function GraphOperationTime() {
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
         clip: 20,
       },
-      {
-        label: 'Total de horas',
-        data: !error && operationTimeHours,
-        borderColor: tailwindConfig().theme.colors.slate[300],
-        borderWidth: 2,
-        tension: 0,
-        pointRadius: 0,
-        pointHoverRadius: 3,
-        pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
-        clip: 20,
-      },
+      // {
+      //   label: 'Total de horas',
+      //   data: !error && operationTimeHours,
+      //   borderColor: tailwindConfig().theme.colors.slate[300],
+      //   borderWidth: 2,
+      //   tension: 0,
+      //   pointRadius: 0,
+      //   pointHoverRadius: 3,
+      //   pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
+      //   clip: 20,
+      // },
     ],
   };
 
