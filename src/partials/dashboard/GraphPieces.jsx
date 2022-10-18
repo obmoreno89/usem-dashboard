@@ -17,25 +17,35 @@ function GraphPieces() {
     toDate,
   });
 
-  const piecesValidation = () => {
-    if (error === undefined) {
-      return (
-        <div className='flex space-x-2'>
-          <p className='text-cyan-700'>{piecesList.length}</p>|<p>{'20'}</p>
-        </div>
-      );
-    } else if (error.status === 404) {
-      return <p>0</p>;
-    } else {
-      return <p>{piecesList.length}</p>;
-    }
-  };
-
   const datePieces = piecesList.map((data) => data.date);
 
   const piecesBad = piecesList.map((data) => data.is_bad);
 
   const piecesOk = piecesList.map((data) => data.is_ok);
+
+  let okTotal = 0;
+
+  piecesOk.forEach((ok) => (okTotal += ok));
+
+  let badTotal = 0;
+
+  piecesBad.forEach((bad) => (badTotal += bad));
+
+  const piecesValidation = () => {
+    if (error === undefined) {
+      return (
+        <div className='flex space-x-2'>
+          <p className='text-cyan-700'>{okTotal}</p>
+          <span>|</span>
+          <p className='text-red-500'>{badTotal}</p>
+        </div>
+      );
+    } else if (error.status === 404) {
+      return <p>0 Piezas</p>;
+    } else {
+      return <p>{piecesList.length}</p>;
+    }
+  };
 
   const chartData = {
     labels: !error && datePieces,
@@ -59,12 +69,12 @@ function GraphPieces() {
       {
         label: 'Rechazadas',
         data: !error && piecesBad,
-        borderColor: tailwindConfig().theme.colors.red[300],
+        borderColor: tailwindConfig().theme.colors.red[500],
         borderWidth: 2,
         tension: 0,
         pointRadius: 0,
         pointHoverRadius: 3,
-        pointBackgroundColor: tailwindConfig().theme.colors.red[300],
+        pointBackgroundColor: tailwindConfig().theme.colors.red[500],
         clip: 20,
       },
     ],
@@ -79,7 +89,8 @@ function GraphPieces() {
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
-          Piezas <span className='text-cyan-700'>OK</span> y Rechazadas
+          Piezas <span className='text-cyan-700'>OK</span> y{' '}
+          <span className='text-red-500'>Rechazadas</span>
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {dateState.join(' ')}
