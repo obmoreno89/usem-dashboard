@@ -40,9 +40,9 @@ function GraphAccident() {
   const dateAccident = accidentList.map((data) => data.date);
 
   let allReportAccidents = {};
-  const prueba = dateAccident.sort();
+  const data = dateAccident.sort();
 
-  prueba.forEach(
+  data.forEach(
     (el) => (allReportAccidents[el] = allReportAccidents[el] + 1 || 1)
   );
 

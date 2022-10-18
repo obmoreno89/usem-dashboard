@@ -16,6 +16,8 @@ function GraphHeadcount() {
     lineNumber,
   });
 
+  const personalTotal = headcountList.men + headcountList.women;
+
   const genderPercentage = [headcountList.men, headcountList.women];
 
   const chartData = {
@@ -42,6 +44,7 @@ function GraphHeadcount() {
         <h2 className='font-semibold text-slate-800'>Headcount</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {dateState.join(' ')}
+          <p>total de personal: {personalTotal}</p>
         </div>
       </header>
       {/* Chart built with Chart.js 3 */}
