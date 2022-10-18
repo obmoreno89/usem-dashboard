@@ -37,8 +37,6 @@ function GraphAccident() {
     }
   };
 
-  console.log(accidentList);
-
   const dateAccident = accidentList.map((data) => data.date);
 
   let allReportAccidents = {};

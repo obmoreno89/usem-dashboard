@@ -19,19 +19,23 @@ function GraphDowntime() {
     lineNumber,
   });
 
-  const downtimeValidation = () => {
-    if (error === undefined) {
-      return <p>{downtimeList.length}</p>;
-    } else if (error.status === 404) {
-      return <p>0</p>;
-    } else {
-      return <p>{downtimeList.length}</p>;
-    }
-  };
-
   const dateDowntime = downtimeList.map((data) => data.date);
 
   const downtimeValue = downtimeList.map((data) => data.downtime);
+
+  let minutesTotal = 0;
+
+  downtimeValue.forEach((minutes) => (minutesTotal += minutes));
+
+  const downtimeValidation = () => {
+    if (error === undefined) {
+      return <p>{minutesTotal} Minutos</p>;
+    } else if (error.status === 404) {
+      return <p>0 Minutos</p>;
+    } else {
+      return <p>{downtimeList.length} Minutos</p>;
+    }
+  };
 
   const chartData = {
     labels: !error && dateDowntime,
