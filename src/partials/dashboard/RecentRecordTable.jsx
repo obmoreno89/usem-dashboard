@@ -40,14 +40,18 @@ function RecentRecordTable() {
                     <tr key={data.id}>
                       <td className='p-2'>
                         <div className='flex items-center'>
-                          <div className='text-slate-800'>{data.type}</div>
+                          <div className='text-slate-800 capitalize'>
+                            {data.type}
+                          </div>
                         </div>
                       </td>
                       <td className='p-2'>
                         <div className='text-center'>{data.line.line}</div>
                       </td>
                       <td className='p-2'>
-                        <div className='text-center'>{data.user}</div>
+                        <div className='text-center capitalize'>
+                          {data.user}
+                        </div>
                       </td>
                       <td className='p-2'>
                         <div className='text-center'>{data.date}</div>
