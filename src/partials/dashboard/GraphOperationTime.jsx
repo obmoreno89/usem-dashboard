@@ -19,20 +19,6 @@ function GraphOperationTime() {
     lineNumber,
   });
 
-  const operationTimeValidation = () => {
-    if (error === undefined) {
-      return (
-        <div>
-          <p>{operationTimeList.length} Horas</p> -<p>{35} minutos</p>;
-        </div>
-      );
-    } else if (error.status === 404) {
-      return <p>0</p>;
-    } else {
-      return <p>{operationTimeList.length}</p>;
-    }
-  };
-
   const dateOperationTime = operationTimeList.map((data) => data.date);
 
   const operationTimeValue = operationTimeList.map(
@@ -42,6 +28,34 @@ function GraphOperationTime() {
   const operationTimeHours = operationTimeList.map(
     (data) => data.operation_time.hours
   );
+
+  let hoursTotal = 0;
+
+  operationTimeHours.forEach((hours) => (hoursTotal += hours));
+
+  let minutesTotal = 0;
+
+  operationTimeValue.forEach((minutes) => (minutesTotal += minutes));
+
+  const operationTimeValidation = () => {
+    if (error === undefined) {
+      return (
+        <div className='flex space-x-2'>
+          <p>{hoursTotal} Horas</p>
+          <span>-</span>
+          <p>{minutesTotal} Minutos</p>
+        </div>
+      );
+    } else if (error.status === 404) {
+      return <p>0 Tiempo</p>;
+    } else {
+      return (
+        <div className='flex space-x-2'>
+          <p>0 Tiempo</p>
+        </div>
+      );
+    }
+  };
 
   const chartData = {
     labels: !error && dateOperationTime,
