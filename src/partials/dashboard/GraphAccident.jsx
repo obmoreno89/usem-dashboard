@@ -25,13 +25,19 @@ function GraphAccident() {
 
   const accidentValidation = () => {
     if (accidentList) {
-      return <p>{accidentList.length} Reportes</p>;
+      if (accidentList.length === 1) {
+        return <p>{accidentList.length} Reporte</p>;
+      } else {
+        return <p>{accidentList.length} Reportes</p>;
+      }
     } else if (success) {
-      return <p>Sin datos</p>;
+      return <p>0 Reportes</p>;
     } else {
-      return <p>{setIncidentList.length}</p>;
+      return <p>{accidentList.length} Reportes</p>;
     }
   };
+
+  console.log(accidentList);
 
   const dateAccident = accidentList.map((data) => data.date);
 
