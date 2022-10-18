@@ -21,11 +21,15 @@ function GraphIncident() {
 
   const incidentValidation = () => {
     if (error === undefined) {
-      return <p>{incidentList.length}</p>;
+      if (incidentList.length === 1) {
+        return <p>{incidentList.length} Reporte</p>;
+      } else {
+        return <p>{incidentList.length} Reportes</p>;
+      }
     } else if (error.status === 404) {
-      return <p>0</p>;
+      return <p>0 Reportes</p>;
     } else {
-      return <p>{incidentList.length}</p>;
+      return <p>{incidentList.length} Reportes</p>;
     }
   };
 

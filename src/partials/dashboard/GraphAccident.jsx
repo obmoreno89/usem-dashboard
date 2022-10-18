@@ -25,7 +25,7 @@ function GraphAccident() {
 
   const accidentValidation = () => {
     if (accidentList) {
-      return <p>{accidentList.length}</p>;
+      return <p>{accidentList.length} Reportes</p>;
     } else if (success) {
       return <p>Sin datos</p>;
     } else {

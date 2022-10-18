@@ -21,7 +21,11 @@ function GraphOperationTime() {
 
   const operationTimeValidation = () => {
     if (error === undefined) {
-      return <p>{operationTimeList.length}</p>;
+      return (
+        <div>
+          <p>{operationTimeList.length} Horas</p> -<p>{35} minutos</p>;
+        </div>
+      );
     } else if (error.status === 404) {
       return <p>0</p>;
     } else {
@@ -57,17 +61,6 @@ function GraphOperationTime() {
         pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
         clip: 20,
       },
-      // {
-      //   label: 'Total de horas',
-      //   data: !error && operationTimeHours,
-      //   borderColor: tailwindConfig().theme.colors.slate[300],
-      //   borderWidth: 2,
-      //   tension: 0,
-      //   pointRadius: 0,
-      //   pointHoverRadius: 3,
-      //   pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
-      //   clip: 20,
-      // },
     ],
   };
 

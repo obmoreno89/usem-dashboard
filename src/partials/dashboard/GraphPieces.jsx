@@ -19,7 +19,11 @@ function GraphPieces() {
 
   const piecesValidation = () => {
     if (error === undefined) {
-      return <p>{piecesList.length}</p>;
+      return (
+        <div className='flex space-x-2'>
+          <p className='text-cyan-700'>{piecesList.length}</p>|<p>{'20'}</p>
+        </div>
+      );
     } else if (error.status === 404) {
       return <p>0</p>;
     } else {
@@ -38,8 +42,8 @@ function GraphPieces() {
     datasets: [
       // Indigo line
       {
-        label: 'Rechazadas',
-        data: !error && piecesBad,
+        label: 'OK',
+        data: !error && piecesOk,
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
           tailwindConfig().theme.colors.blue[500]
@@ -53,14 +57,14 @@ function GraphPieces() {
         clip: 20,
       },
       {
-        label: 'OK',
-        data: !error && piecesOk,
-        borderColor: tailwindConfig().theme.colors.slate[300],
+        label: 'Rechazadas',
+        data: !error && piecesBad,
+        borderColor: tailwindConfig().theme.colors.red[300],
         borderWidth: 2,
         tension: 0,
         pointRadius: 0,
         pointHoverRadius: 3,
-        pointBackgroundColor: tailwindConfig().theme.colors.slate[300],
+        pointBackgroundColor: tailwindConfig().theme.colors.red[300],
         clip: 20,
       },
     ],
@@ -75,7 +79,7 @@ function GraphPieces() {
           {/* Menu button */}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
-          Piezas OK y Rechazadas
+          Piezas <span className='text-cyan-700'>OK</span> y Rechazadas
         </h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {dateState.join(' ')}
