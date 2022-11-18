@@ -35,7 +35,7 @@ function PageNotFound() {
                   Hmm... esta página no existe. ¡Intenta buscar otra cosa!
                 </div>
                 <Link
-                  to='/'
+                  to='/kpis/'
                   className='btn bg-primary hover:bg-secondary text-white'>
                   Volver al Inicio
                 </Link>

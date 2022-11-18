@@ -43,7 +43,7 @@ function App() {
         {/* Dashboard */}
         <Route
           exact
-          path='/'
+          path='/kpis/'
           element={
             <PrivateRoute>
               <Dashboard />
@@ -53,15 +53,15 @@ function App() {
 
         {/* Auth */}
         <Route
-          path='/signin'
+          path='/kpis/signin'
           element={
             <PublicRoute>
               <Signin />
             </PublicRoute>
           }
         />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/kpis/signup' element={<Signup />} />
+        <Route path='/kpis/reset-password' element={<ResetPassword />} />
 
         {/* Vista previa de Componentes */}
         <Route path='/component/form' element={<FormPage />} />

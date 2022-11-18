@@ -42,7 +42,7 @@ function Signin() {
             localStorage.setItem('token', json.token);
             localStorage.setItem('id', json.id);
             localStorage.setItem('first_name', json.first_name);
-            navigate('/');
+            navigate('/kpis/');
             dispatch(finishLoading());
           }, 1000);
         } else {

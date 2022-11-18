@@ -87,11 +87,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           {/* Logo */}
 
           {sidebarExpanded ? (
-            <NavLink end to='/' className='block'>
+            <NavLink end to='/kpis/' className='block'>
               <img src={iconSidebar.nidataLogo} alt='Logo' />
             </NavLink>
           ) : (
-            <NavLink end to='/' className='block'>
+            <NavLink end to='/kpis/' className='block'>
               <img src={iconSidebar.nidataCirculeLogo} alt='Logo' />
             </NavLink>
           )}
@@ -105,7 +105,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               {/* Dashboard */}
               <SidebarLinkGroup
                 activecondition={
-                  pathname === '/' || pathname.includes('dashboard')
+                  pathname === '/kpis/' || pathname.includes('dashboard')
                 }>
                 {(handleClick, open) => {
                   return (
@@ -113,7 +113,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       <a
                         href='#0'
                         className={`block text-slate-200 hover:text-white truncate transition duration-150 ${
-                          (pathname === '/' ||
+                          (pathname === '/kpis/' ||
                             pathname.includes('dashboard')) &&
                           'hover:text-slate-200'
                         }`}
@@ -130,7 +130,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               viewBox='0 0 24 24'>
                               <path
                                 className={`fill-current text-slate-400 ${
-                                  (pathname === '/' ||
+                                  (pathname === '/kpis/' ||
                                     pathname.includes('dashboard')) &&
                                   '!text-primary'
                                 }`}
@@ -138,7 +138,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               />
                               <path
                                 className={`fill-current text-slate-600 ${
-                                  (pathname === '/' ||
+                                  (pathname === '/kpis/' ||
                                     pathname.includes('dashboard')) &&
                                   'text-secondary'
                                 }`}
@@ -146,7 +146,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               />
                               <path
                                 className={`fill-current text-slate-400 ${
-                                  (pathname === '/' ||
+                                  (pathname === '/kpis/' ||
                                     pathname.includes('dashboard')) &&
                                   'text-white'
                                 }`}
@@ -174,7 +174,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/'
+                              to='/kpis/'
                               className={({ isActive }) =>
                                 'block text-slate-400 hover:text-slate-200 transition duration-150 truncate ' +
                                 (isActive ? '!text-primary' : '')
@@ -187,7 +187,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/a'
+                              to='/kpis/accidentes'
                               className={({ isActive }) =>
                                 'block text-slate-400 hover:text-slate-200 transition duration-150 truncate ' +
                                 (isActive ? '!text-primary' : '')
@@ -200,7 +200,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/a'
+                              to='/kpis/incidentes'
                               className={({ isActive }) =>
                                 'block text-slate-400 hover:text-slate-200 transition duration-150 truncate ' +
                                 (isActive ? '!text-primary' : '')
@@ -213,7 +213,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/a'
+                              to='/kpis/piezas'
                               className={({ isActive }) =>
                                 'block text-slate-400 hover:text-slate-200 transition duration-150 truncate ' +
                                 (isActive ? '!text-primary' : '')
@@ -226,7 +226,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/a'
+                              to='/kpis/piezas-ok'
                               className={({ isActive }) =>
                                 'block text-slate-400 hover:text-slate-200 transition duration-150 truncate ' +
                                 (isActive ? '!text-primary' : '')
@@ -239,7 +239,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/a'
+                              to='/kpis/downtime'
                               className={({ isActive }) =>
                                 'block text-slate-400 hover:text-slate-200 transition duration-150 truncate ' +
                                 (isActive ? '!text-primary' : '')

@@ -100,7 +100,7 @@ function DropdownProfile({ align }) {
             <li>
               <Link
                 className='font-medium text-sm text-black-500 hover:text-primary flex items-center py-1 px-3'
-                to='/signin'
+                to='signin'
                 onClick={() => {
                   setDropdownOpen(!dropdownOpen);
                   logout();
