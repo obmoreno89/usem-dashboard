@@ -3,7 +3,10 @@ import Transition from '../../utils/Transition';
 import { useGetBusinessUnityQuery } from '../../store/apis/businessUnityApi';
 import { useGetParamNameBusinessUnityQuery } from '../../store/apis/paramNameBusinessUnityApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNameBusinessUnity } from '../../store/slices/state/stateSlice';
+import {
+  setNameBusinessUnity,
+  setIdNameBusinessUnity,
+} from '../../store/slices/state/stateSlice';
 
 const OptionsBusinessUnityPanel = ({
   setBusinessUnityPanelOpen,
@@ -13,7 +16,11 @@ const OptionsBusinessUnityPanel = ({
   const closeBtn = useRef(null);
   const panelContent = useRef(null);
   const dispatch = useDispatch();
-  const { nameBusinessUnity } = useSelector((state) => state.state);
+  const { nameBusinessUnity, idNameBusinessUnity } = useSelector(
+    (state) => state.state
+  );
+
+  console.log(idNameBusinessUnity);
 
   const { data: businessUnityList = [] } = useGetBusinessUnityQuery();
 
@@ -33,6 +40,13 @@ const OptionsBusinessUnityPanel = ({
   const onChangebusiness = (e) =>
     dispatch(setNameBusinessUnity(e.target.value));
 
+  const onChangeNameBusiness = (optionId) => {
+    if (idNameBusinessUnity === optionId) {
+      dispatch(setIdNameBusinessUnity(null));
+    } else {
+      dispatch(setIdNameBusinessUnity(optionId));
+    }
+  };
   return (
     <>
       <Transition
@@ -98,7 +112,7 @@ const OptionsBusinessUnityPanel = ({
                       <li className='py-1 px-3'>
                         <label className='flex items-center'>
                           <input
-                            type='radio'
+                            type='checkbox'
                             className='form-checkbox'
                             value={options.name}
                             onChange={onChangebusiness}
@@ -128,9 +142,11 @@ const OptionsBusinessUnityPanel = ({
                         <li className='py-1 px-3'>
                           <label className='flex items-center'>
                             <input
-                              type='radio'
+                              type='checkbox'
                               className='form-checkbox'
                               value={options.id}
+                              checked={idNameBusinessUnity === options.id}
+                              onClick={() => onChangeNameBusiness(options.id)}
                             />
                             <span className='text-sm font-semibold ml-2'>
                               {options.name}

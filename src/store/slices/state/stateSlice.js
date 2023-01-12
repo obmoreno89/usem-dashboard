@@ -23,6 +23,7 @@ const initialState = {
   dateState: dateRange,
   lineNumber: 1,
   nameBusinessUnity: null,
+  idNameBusinessUnity: null,
 };
 
 export const stateSlice = createSlice({
@@ -38,10 +39,17 @@ export const stateSlice = createSlice({
     setNameBusinessUnity: (state, action) => {
       state.nameBusinessUnity = action.payload;
     },
+    setIdNameBusinessUnity: (state, action) => {
+      state.idNameBusinessUnity = action.payload;
+    },
   },
 });
 
-export const { setState, setLineNumber, setNameBusinessUnity } =
-  stateSlice.actions;
+export const {
+  setState,
+  setLineNumber,
+  setNameBusinessUnity,
+  setIdNameBusinessUnity,
+} = stateSlice.actions;
 
 export default stateSlice.reducer;
