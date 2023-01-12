@@ -61,7 +61,8 @@ function DropdownFilter({ align }) {
         className='btn bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600'
         aria-haspopup='true'
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        aria-expanded={dropdownOpen}>
+        aria-expanded={dropdownOpen}
+      >
         <span className='sr-only'>Filter</span>
         <wbr />
         <svg className='w-4 h-4 fill-current' viewBox='0 0 16 16'>
@@ -79,7 +80,8 @@ function DropdownFilter({ align }) {
         enterEnd='opacity-100 translate-y-0'
         leave='transition ease-out duration-200'
         leaveStart='opacity-100'
-        leaveEnd='opacity-0'>
+        leaveEnd='opacity-0'
+      >
         <div ref={dropdown}>
           <div className='text-xs font-semibold text-slate-400 uppercase pt-1.5 pb-2 px-4'>
             Filtrar numero de linea
