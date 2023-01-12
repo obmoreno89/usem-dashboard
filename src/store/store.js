@@ -11,6 +11,7 @@ import { operationTimeApi } from './apis/operationTimeApi';
 import { headcountApi } from './apis/headcountApi';
 import { businessUnityApi } from './apis/businessUnityApi';
 import { paramNameBusinessUnityApi } from './apis/paramNameBusinessUnityApi';
+import { lineNumberApi } from './apis/lineNumberApi';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     [headcountApi.reducerPath]: headcountApi.reducer,
     [businessUnityApi.reducerPath]: businessUnityApi.reducer,
     [paramNameBusinessUnityApi.reducerPath]: paramNameBusinessUnityApi.reducer,
+    [lineNumberApi.reducerPath]: lineNumberApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
@@ -37,5 +39,6 @@ export const store = configureStore({
       operationTimeApi.middleware,
       headcountApi.middleware,
       paramNameBusinessUnityApi.middleware,
+      lineNumberApi.middleware,
     ]),
 });

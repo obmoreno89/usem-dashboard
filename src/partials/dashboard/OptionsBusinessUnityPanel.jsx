@@ -20,8 +20,6 @@ const OptionsBusinessUnityPanel = ({
     (state) => state.state
   );
 
-  console.log(idNameBusinessUnity);
-
   const { data: businessUnityList = [] } = useGetBusinessUnityQuery();
 
   const { data: nameBusinessUnityList = [] } =
@@ -52,6 +50,7 @@ const OptionsBusinessUnityPanel = ({
       dispatch(setIdNameBusinessUnity(optionId));
     }
   };
+
   return (
     <>
       <Transition
@@ -111,7 +110,7 @@ const OptionsBusinessUnityPanel = ({
                 {businessUnityList?.map((options, index) => (
                   <div key={index}>
                     <div className='text-md font-semibold text-slate-400 pb-2'>
-                      selecciona BU
+                      selecciona el nombre de BU
                     </div>
                     <ul className='mb-4'>
                       <li className='py-1 px-3'>
@@ -121,7 +120,7 @@ const OptionsBusinessUnityPanel = ({
                             className='form-checkbox'
                             value={options.name}
                             checked={nameBusinessUnity === options.name}
-                            onClick={() => onChangebusiness(options.name)}
+                            onChange={() => onChangebusiness(options.name)}
                           />
                           <span className='text-sm font-semibold ml-2'>
                             {options.name}
@@ -139,7 +138,7 @@ const OptionsBusinessUnityPanel = ({
                 <ul>
                   <div>
                     <h2 className='text-md font-semibold text-slate-400 pb-2'>
-                      selecciona las opciones
+                      selecciona una opción
                     </h2>
                   </div>
                   {nameBusinessUnityList?.map((options, index) => (
@@ -152,7 +151,7 @@ const OptionsBusinessUnityPanel = ({
                               className='form-checkbox'
                               value={options.id}
                               checked={idNameBusinessUnity === options.id}
-                              onClick={() => onChangeNameBusiness(options.id)}
+                              onChange={() => onChangeNameBusiness(options.id)}
                             />
                             <span className='text-sm font-semibold ml-2'>
                               {options.name}
@@ -164,52 +163,32 @@ const OptionsBusinessUnityPanel = ({
                   ))}
                 </ul>
               )}
-            </div>
-            <div className='w-full px-5 pt-4 2xl:pt-8'>
-              <ul>
-                <div>
-                  <div className='text-md font-semibold text-slate-400 pb-2'>
-                    selecciona una opcion
-                  </div>
-                  <ul className='mb-4 '>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          Cuerpos
-                        </span>
-                      </label>
-                    </li>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          Embobinado
-                        </span>
-                      </label>
-                    </li>
-                  </ul>
+              {idNameBusinessUnity > 0 && nameBusinessUnity ? (
+                <div className='flex justify-center items-center mt-14'>
+                  <button
+                    onClick={() => {
+                      setLineNumberPanelOpen(true);
+                      setBusinessUnityPanelOpen(false);
+                    }}
+                    className='btn bg-primary hover:bg-secondary text-white hover:text-primary font-semibold w-full h-12'
+                  >
+                    Continuar
+                  </button>
                 </div>
-              </ul>
-              <div className='flex justify-center items-center mt-14'>
-                <button
-                  onClick={() => {
-                    setLineNumberPanelOpen(true);
-                    setBusinessUnityPanelOpen(false);
-                  }}
-                  className='btn bg-primary hover:bg-secondary text-white hover:text-primary font-semibold w-full h-12'
-                >
-                  continuar
-                </button>
-              </div>
+              ) : (
+                <div className='flex justify-center items-center mt-14'>
+                  <button
+                    onClick={() => {
+                      setLineNumberPanelOpen(true);
+                      setBusinessUnityPanelOpen(false);
+                    }}
+                    className='btn bg-primary text-white disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed shadow-none font-semibold w-full h-12'
+                    disabled
+                  >
+                    Continuar
+                  </button>
+                </div>
+              )}
             </div>
           </section>
         </div>
