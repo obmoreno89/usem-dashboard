@@ -37,8 +37,13 @@ const OptionsBusinessUnityPanel = ({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  const onChangebusiness = (e) =>
-    dispatch(setNameBusinessUnity(e.target.value));
+  const onChangebusiness = (optionName) => {
+    if (nameBusinessUnity === optionName) {
+      dispatch(setNameBusinessUnity(null));
+    } else {
+      dispatch(setNameBusinessUnity(optionName));
+    }
+  };
 
   const onChangeNameBusiness = (optionId) => {
     if (idNameBusinessUnity === optionId) {
@@ -115,7 +120,8 @@ const OptionsBusinessUnityPanel = ({
                             type='checkbox'
                             className='form-checkbox'
                             value={options.name}
-                            onChange={onChangebusiness}
+                            checked={nameBusinessUnity === options.name}
+                            onClick={() => onChangebusiness(options.name)}
                           />
                           <span className='text-sm font-semibold ml-2'>
                             {options.name}
