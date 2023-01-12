@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-let fecha = ['2022-10-01', 'to', '2022-10-29'];
-
 let lastDate = new Date();
 
 let year = lastDate.toLocaleString('default', { year: 'numeric' });
@@ -21,12 +19,15 @@ let formattedDates = years + '-' + months + '-' + days;
 
 const dateRange = [formattedDates, 'to', formattedDate];
 
+const initialState = {
+  dateState: dateRange,
+  lineNumber: 1,
+  nameBusinessUnity: null,
+};
+
 export const stateSlice = createSlice({
+  initialState,
   name: 'state',
-  initialState: {
-    dateState: dateRange,
-    lineNumber: 1,
-  },
   reducers: {
     setState: (state, action) => {
       state.dateState = action.payload;
@@ -34,9 +35,13 @@ export const stateSlice = createSlice({
     setLineNumber: (state, action) => {
       state.lineNumber = action.payload;
     },
+    setNameBusinessUnity: (state, action) => {
+      state.nameBusinessUnity = action.payload;
+    },
   },
 });
 
-export const { setState, setLineNumber } = stateSlice.actions;
+export const { setState, setLineNumber, setNameBusinessUnity } =
+  stateSlice.actions;
 
 export default stateSlice.reducer;
