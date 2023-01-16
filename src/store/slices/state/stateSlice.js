@@ -21,9 +21,11 @@ const dateRange = [formattedDates, 'to', formattedDate];
 
 const initialState = {
   dateState: dateRange,
-  lineNumber: 1,
+  lineNumber: null,
+  lineNumberName: null,
   nameBusinessUnity: null,
   idNameBusinessUnity: null,
+  nameBU: null,
 };
 
 export const stateSlice = createSlice({
@@ -36,11 +38,17 @@ export const stateSlice = createSlice({
     setLineNumber: (state, action) => {
       state.lineNumber = action.payload;
     },
+    setLineNumberName: (state, action) => {
+      state.lineNumberName = action.payload;
+    },
     setNameBusinessUnity: (state, action) => {
       state.nameBusinessUnity = action.payload;
     },
     setIdNameBusinessUnity: (state, action) => {
       state.idNameBusinessUnity = action.payload;
+    },
+    setNameBU: (state, action) => {
+      state.nameBU = action.payload;
     },
   },
 });
@@ -50,6 +58,8 @@ export const {
   setLineNumber,
   setNameBusinessUnity,
   setIdNameBusinessUnity,
+  setNameBU,
+  setLineNumberName,
 } = stateSlice.actions;
 
 export default stateSlice.reducer;

@@ -2,7 +2,10 @@ import { useEffect, useRef } from 'react';
 import Transition from '../../utils/Transition';
 import { useGetLineNumberQuery } from '../../store/apis/lineNumberApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLineNumber } from '../../store/slices/state/stateSlice';
+import {
+  setLineNumber,
+  setLineNumberName,
+} from '../../store/slices/state/stateSlice';
 
 const LineNumberPanel = ({
   setLineNumberPanelOpen,
@@ -20,11 +23,13 @@ const LineNumberPanel = ({
     idNameBusinessUnity,
   });
 
-  const onChangeNameBusiness = (optionId) => {
-    if (idNameBusinessUnity === optionId) {
-      dispatch(setLineNumber(1));
+  const onChangeNameBusiness = (optionId, optionName) => {
+    if (idNameBusinessUnity === optionId < 1) {
+      dispatch(setLineNumber(null));
+      dispatch(setLineNumberName(null));
     } else {
       dispatch(setLineNumber(optionId));
+      dispatch(setLineNumberName(optionName));
     }
   };
 
@@ -115,7 +120,7 @@ const LineNumberPanel = ({
             </button>
           </section>
           <section>
-            {lineNumberList?.lines?.length > 0 ? (
+            {lineNumberList?.lines?.length ? (
               <div className='w-full px-5  2xl:pt-8'>
                 {lineNumberList?.lines?.map((options, index) => (
                   <ul key={index}>
@@ -126,7 +131,9 @@ const LineNumberPanel = ({
                           className='form-checkbox'
                           value={options.id}
                           checked={lineNumber === options.id}
-                          onChange={() => onChangeNameBusiness(options.id)}
+                          onChange={() =>
+                            onChangeNameBusiness(options.id, options.name)
+                          }
                         />
                         <span className='text-sm font-semibold ml-2'>
                           {options.name}

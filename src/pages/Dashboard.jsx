@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import iconDashboard from '../images/iconDashboard';
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import Datepicker from '../partials/dashboard/Datepicker';
@@ -13,12 +13,13 @@ import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
 import OptionsBusinessUnityPanel from '../partials/dashboard/OptionsBusinessUnityPanel';
 import LineNumberPanel from '../partials/dashboard/LineNumberPanel';
 import { useSelector } from 'react-redux';
+
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [businessUnityPanelOpen, setBusinessUnityPanelOpen] = useState(false);
   const [lineNumberPanelOpen, setLineNumberPanelOpen] = useState(false);
 
-  const { nameBusinessUnity, idNameBusinessUnity } = useSelector(
+  const { nameBusinessUnity, nameBU, lineNumberName } = useSelector(
     (state) => state.state
   );
 
@@ -35,9 +36,31 @@ function Dashboard() {
         <main>
           <div className='px-4 sm:px-6 lg:px-8 py-8 max-w-9xl mx-auto'>
             <div className='flex justify-between'>
-              <div className='flex space-x-3'>
-                <h2 className='font-semibold text-lg'>Dashboard</h2>
-              </div>
+              <article className='flex space-x-3'>
+                {nameBusinessUnity && nameBU && lineNumberName && (
+                  <>
+                    <h2 className='font-bold'>Unidad de negocio:</h2>
+                    <section>
+                      {' '}
+                      <div className='flex space-x-2 font-semibold'>
+                        <span>{nameBusinessUnity}</span>
+                        <img
+                          className='w-4'
+                          src={iconDashboard.chevronRight}
+                          alt='Arrow'
+                        />
+                        <span>{nameBU}</span>
+                        <img
+                          className='w-4'
+                          src={iconDashboard.chevronRight}
+                          alt='Arrow'
+                        />
+                        <span>{lineNumberName}</span>
+                      </div>
+                    </section>
+                  </>
+                )}
+              </article>
               <div className='grid grid-flow-col sm:auto-cols-max sm:justify-end gap-2 mb-5'>
                 <button
                   onClick={() => setBusinessUnityPanelOpen(true)}

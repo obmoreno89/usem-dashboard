@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setNameBusinessUnity,
   setIdNameBusinessUnity,
+  setNameBU,
 } from '../../store/slices/state/stateSlice';
 
 const OptionsBusinessUnityPanel = ({
@@ -16,7 +17,7 @@ const OptionsBusinessUnityPanel = ({
   const closeBtn = useRef(null);
   const panelContent = useRef(null);
   const dispatch = useDispatch();
-  const { nameBusinessUnity, idNameBusinessUnity } = useSelector(
+  const { nameBusinessUnity, idNameBusinessUnity, nameBU } = useSelector(
     (state) => state.state
   );
 
@@ -43,11 +44,13 @@ const OptionsBusinessUnityPanel = ({
     }
   };
 
-  const onChangeNameBusiness = (optionId) => {
+  const onChangeNameBusiness = (optionId, optioName) => {
     if (idNameBusinessUnity === optionId) {
       dispatch(setIdNameBusinessUnity(null));
+      dispatch(setNameBU(null));
     } else {
       dispatch(setIdNameBusinessUnity(optionId));
+      dispatch(setNameBU(optioName));
     }
   };
 
@@ -151,7 +154,9 @@ const OptionsBusinessUnityPanel = ({
                               className='form-checkbox'
                               value={options.id}
                               checked={idNameBusinessUnity === options.id}
-                              onChange={() => onChangeNameBusiness(options.id)}
+                              onChange={() =>
+                                onChangeNameBusiness(options.id, options.name)
+                              }
                             />
                             <span className='text-sm font-semibold ml-2'>
                               {options.name}
