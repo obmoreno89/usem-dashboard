@@ -17,6 +17,8 @@ function GraphPieces() {
     toDate,
   });
 
+  console.log(piecesList);
+
   const datePieces = piecesList.map((data) => data.date);
 
   const piecesBad = piecesList.map((data) => data.is_bad);

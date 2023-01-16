@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
-import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
-import DropdownFilter from '../partials/dashboard/DropdownFilter';
 import Datepicker from '../partials/dashboard/Datepicker';
 import GraphAccident from '../partials/dashboard/GraphAccident';
 import GraphIncident from '../partials/dashboard/GraphIncident';
@@ -12,15 +10,17 @@ import GraphDowntime from '../partials/dashboard/GraphDowntime';
 import RecentRecordTable from '../partials/dashboard/RecentRecordTable';
 import GraphHeadcount from '../partials/dashboard/GraphHeadcount';
 import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
-import GraphPpa from '../partials/dashboard/GraphPpa';
-import GraphReWork from '../partials/dashboard/GraphReWork';
 import OptionsBusinessUnityPanel from '../partials/dashboard/OptionsBusinessUnityPanel';
 import LineNumberPanel from '../partials/dashboard/LineNumberPanel';
-
+import { useSelector } from 'react-redux';
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [businessUnityPanelOpen, setBusinessUnityPanelOpen] = useState(false);
   const [lineNumberPanelOpen, setLineNumberPanelOpen] = useState(false);
+
+  const { nameBusinessUnity, idNameBusinessUnity } = useSelector(
+    (state) => state.state
+  );
 
   return (
     <div className='flex h-screen overflow-hidden'>
@@ -33,11 +33,12 @@ function Dashboard() {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         <main>
-          <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-            <WelcomeBanner />
-
-            <div>
-              <div className='grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2 mb-5'>
+          <div className='px-4 sm:px-6 lg:px-8 py-8 max-w-9xl mx-auto'>
+            <div className='flex justify-between'>
+              <div className='flex space-x-3'>
+                <h2 className='font-semibold text-lg'>Dashboard</h2>
+              </div>
+              <div className='grid grid-flow-col sm:auto-cols-max sm:justify-end gap-2 mb-5'>
                 <button
                   onClick={() => setBusinessUnityPanelOpen(true)}
                   className='btn bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600'
