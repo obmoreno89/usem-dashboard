@@ -113,7 +113,7 @@ const OptionsBusinessUnityPanel = ({
                 {businessUnityList?.map((options, index) => (
                   <div key={index}>
                     <div className='text-md font-semibold text-slate-400 pb-2'>
-                      selecciona el nombre de BU
+                      Selecciona la BU
                     </div>
                     <ul className='mb-4'>
                       <li className='py-1 px-3'>
@@ -141,7 +141,7 @@ const OptionsBusinessUnityPanel = ({
                 <ul>
                   <div>
                     <h2 className='text-md font-semibold text-slate-400 pb-2'>
-                      selecciona una opción
+                      Selecciona el Área
                     </h2>
                   </div>
                   {nameBusinessUnityList?.map((options, index) => (

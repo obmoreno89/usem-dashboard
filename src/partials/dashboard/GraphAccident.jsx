@@ -8,7 +8,7 @@ import { useGetAccidentQuery } from '../../store/apis/accidentApi';
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 function GraphAccident() {
-  const { dateState, lineNumber } = useSelector((state) => state.state);
+  const { dateState, lineNumber, lineNumberName } = useSelector((state) => state.state);
   const getFirstDateAccident = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDateAccident[0];
   const toDate = getFirstDateAccident[2];
@@ -22,7 +22,6 @@ function GraphAccident() {
     toDate,
     lineNumber,
   });
-
   const accidentValidation = () => {
     if (accidentList) {
       if (accidentList.length === 1) {

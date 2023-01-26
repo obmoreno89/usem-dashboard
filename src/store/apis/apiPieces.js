@@ -14,8 +14,8 @@ export const apiPieces = createApi({
 
   endpoints: (builder) => ({
     getPieces: builder.query({
-      query: ({ fromDate, toDate }) =>
-        `?from_date=${fromDate}&to_date=${toDate}`,
+      query: ({ fromDate, toDate, lineNumberName }) =>
+        `?from_date=${fromDate}&to_date=${toDate}&line-name=${lineNumberName}`,
     }),
   }),
 });

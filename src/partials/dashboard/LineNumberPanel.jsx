@@ -122,6 +122,11 @@ const LineNumberPanel = ({
           <section>
             {lineNumberList?.lines?.length ? (
               <div className='w-full px-5  2xl:pt-8'>
+                  <div>
+                    <h2 className='text-md font-semibold text-slate-400 pb-2'>
+                      Selecciona una Línea
+                    </h2>
+                  </div>
                 {lineNumberList?.lines?.map((options, index) => (
                   <ul key={index}>
                     <li className='py-1 px-3'>
