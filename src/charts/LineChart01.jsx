@@ -9,11 +9,10 @@ import {
   LinearScale,
   TimeScale,
   Tooltip,
+  scales,
 } from 'chart.js';
 import 'chartjs-adapter-moment';
 import zoomPlugin from 'chartjs-plugin-zoom';
-
-Chart.register(zoomPlugin);
 
 // Import utilities
 import { tailwindConfig, formatValue } from '../utils/Utils';
@@ -25,7 +24,8 @@ Chart.register(
   PointElement,
   LinearScale,
   TimeScale,
-  Tooltip
+  Tooltip,
+  zoomPlugin
 );
 
 function LineChart01({ data, width, height, name }) {
@@ -39,12 +39,13 @@ function LineChart01({ data, width, height, name }) {
       data: data,
 
       options: {
+        scales: scales,
         responsive: true,
         chartArea: {
           backgroundColor: tailwindConfig().theme.colors.slate[50],
         },
         layout: {
-          padding: 5,
+          padding: 20,
         },
         scales: {
           y: {
@@ -60,12 +61,12 @@ function LineChart01({ data, width, height, name }) {
             display: true,
           },
         },
+
         plugins: {
           zoom: {
             zoom: {
               wheel: {
                 enabled: true,
-                speed: 0.1,
               },
               pinch: {
                 enabled: true,
@@ -87,8 +88,6 @@ function LineChart01({ data, width, height, name }) {
           intersect: false,
           mode: 'nearest',
         },
-        maintainAspectRatio: true,
-        resizeDelay: 200,
       },
     });
     return () => chart.destroy();
