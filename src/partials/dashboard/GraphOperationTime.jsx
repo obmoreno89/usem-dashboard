@@ -1,13 +1,19 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
+import iconDashboard from '../../images/iconDashboard';
 import { useGetOperationTimeQuery } from '../../store/apis/operationTimeApi';
 import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphOperationTime() {
+function GraphOperationTime({
+  setGraphModalOperationTimeOpen,
+  width,
+  height,
+  icon,
+}) {
   const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -84,7 +90,20 @@ function GraphOperationTime() {
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
           <img src={iconGraph.time} width='32' height='32' alt='Icon 03' />
-          {/* Menu button */}
+          {!icon && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setGraphModalOperationTimeOpen(true);
+              }}
+            >
+              <img
+                className='w-7'
+                src={iconDashboard.maximize}
+                alt='Maximize'
+              />
+            </button>
+          )}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
           Operation Time
@@ -104,8 +123,8 @@ function GraphOperationTime() {
         <LineChart
           name='Operation time'
           data={chartData}
-          width={389}
-          height={128}
+          width={width ? 1200 : 389}
+          height={height ? 400 : 128}
         />
       </div>
     </div>

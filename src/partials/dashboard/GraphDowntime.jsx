@@ -1,13 +1,14 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
+import iconDashboard from '../../images/iconDashboard';
 import { useGetDowntimeQuery } from '../../store/apis/downtimeApi';
 import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphDowntime() {
+function GraphDowntime({ setGraphModalDowntimeOpen, width, height, icon }) {
   const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -65,7 +66,20 @@ function GraphDowntime() {
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
           <img src={iconGraph.time} width='32' height='32' alt='Icon 03' />
-          {/* Menu button */}
+          {!icon && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setGraphModalDowntimeOpen(true);
+              }}
+            >
+              <img
+                className='w-7'
+                src={iconDashboard.maximize}
+                alt='Maximize'
+              />
+            </button>
+          )}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>Downtime</h2>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
@@ -80,7 +94,12 @@ function GraphDowntime() {
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart name='Downtime' data={chartData} width={389} height={128} />
+        <LineChart
+          name='Downtime'
+          data={chartData}
+          width={width ? 1200 : 389}
+          height={height ? 400 : 128}
+        />
       </div>
     </div>
   );

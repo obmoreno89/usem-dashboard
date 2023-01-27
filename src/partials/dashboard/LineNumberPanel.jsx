@@ -1,5 +1,11 @@
 import { useEffect, useRef } from 'react';
 import Transition from '../../utils/Transition';
+import { useGetLineNumberQuery } from '../../store/apis/lineNumberApi';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setLineNumber,
+  setLineNumberName,
+} from '../../store/slices/state/stateSlice';
 
 const LineNumberPanel = ({
   setLineNumberPanelOpen,
@@ -8,6 +14,24 @@ const LineNumberPanel = ({
 }) => {
   const closeBtn = useRef(null);
   const panelContent = useRef(null);
+  const dispatch = useDispatch();
+  const { idNameBusinessUnity, lineNumber } = useSelector(
+    (state) => state.state
+  );
+
+  const { data: lineNumberList = [] } = useGetLineNumberQuery({
+    idNameBusinessUnity,
+  });
+
+  const onChangeNameBusiness = (optionId, optionName) => {
+    if (idNameBusinessUnity === optionId < 1) {
+      dispatch(setLineNumber(null));
+      dispatch(setLineNumberName(null));
+    } else {
+      dispatch(setLineNumber(optionId));
+      dispatch(setLineNumberName(optionName));
+    }
+  };
 
   // close if the esc key is pressed
   useEffect(() => {
@@ -96,39 +120,50 @@ const LineNumberPanel = ({
             </button>
           </section>
           <section>
-            <div className='w-full px-5  2xl:pt-8'>
-              <ul className='mb-4'>
-                <li className='py-1'>
-                  <label className='flex items-center'>
-                    <input type='radio' className='form-checkbox' value='1' />
-                    <span className='text-sm font-medium ml-2'>U</span>
-                  </label>
-                </li>
-                <li className='py-1'>
-                  <label className='flex items-center'>
-                    <input type='radio' className='form-checkbox' value='2' />
-                    <span className='text-sm font-medium ml-2'>G.MENA</span>
-                  </label>
-                </li>
-                <li className='py-1'>
-                  <label className='flex items-center'>
-                    <input type='radio' className='form-checkbox' value='3' />
-                    <span className='text-sm font-medium ml-2'>MFL</span>
-                  </label>
-                </li>
-                <li className='py-1'>
-                  <label className='flex items-center'>
-                    <input type='radio' className='form-checkbox' value='4' />
-                    <span className='text-sm font-medium ml-2'>LFL</span>
-                  </label>
-                </li>
-              </ul>
-              <div className='flex justify-center items-center mt-14'>
-                <button className='btn bg-primary hover:bg-secondary text-white hover:text-primary font-semibold w-full h-12'>
-                  continuar
-                </button>
+            {lineNumberList?.lines?.length ? (
+              <div className='w-full px-5  2xl:pt-8'>
+                  <div>
+                    <h2 className='text-md font-semibold text-slate-400 pb-2'>
+                      Selecciona una Línea
+                    </h2>
+                  </div>
+                {lineNumberList?.lines?.map((options, index) => (
+                  <ul key={index}>
+                    <li className='py-1 px-3'>
+                      <label className='flex items-center'>
+                        <input
+                          type='checkbox'
+                          className='form-checkbox'
+                          value={options.id}
+                          checked={lineNumber === options.id}
+                          onChange={() =>
+                            onChangeNameBusiness(options.id, options.name)
+                          }
+                        />
+                        <span className='text-sm font-semibold ml-2'>
+                          {options.name}
+                        </span>
+                      </label>
+                    </li>
+                  </ul>
+                ))}
+
+                <div className='flex justify-center items-center mt-14'>
+                  <button
+                    onClick={() => setLineNumberPanelOpen(false)}
+                    className='btn bg-primary hover:bg-secondary text-white hover:text-primary font-semibold w-full h-12'
+                  >
+                    Finalizar
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className='w-full px-5  2xl:pt-8 flex justify-center items-start'>
+                <h2 className='font-semibold text-slate-500 text-xl'>
+                  Sin lineas
+                </h2>
+              </div>
+            )}
           </section>
         </div>
       </Transition>

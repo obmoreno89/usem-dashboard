@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-let fecha = ['2022-10-01', 'to', '2022-10-29'];
-
 let lastDate = new Date();
 
 let year = lastDate.toLocaleString('default', { year: 'numeric' });
@@ -21,12 +19,18 @@ let formattedDates = years + '-' + months + '-' + days;
 
 const dateRange = [formattedDates, 'to', formattedDate];
 
+const initialState = {
+  dateState: dateRange,
+  lineNumber: null,
+  lineNumberName: null,
+  nameBusinessUnity: null,
+  idNameBusinessUnity: null,
+  nameBU: null,
+};
+
 export const stateSlice = createSlice({
+  initialState,
   name: 'state',
-  initialState: {
-    dateState: dateRange,
-    lineNumber: 1,
-  },
   reducers: {
     setState: (state, action) => {
       state.dateState = action.payload;
@@ -34,9 +38,28 @@ export const stateSlice = createSlice({
     setLineNumber: (state, action) => {
       state.lineNumber = action.payload;
     },
+    setLineNumberName: (state, action) => {
+      state.lineNumberName = action.payload;
+    },
+    setNameBusinessUnity: (state, action) => {
+      state.nameBusinessUnity = action.payload;
+    },
+    setIdNameBusinessUnity: (state, action) => {
+      state.idNameBusinessUnity = action.payload;
+    },
+    setNameBU: (state, action) => {
+      state.nameBU = action.payload;
+    },
   },
 });
 
-export const { setState, setLineNumber } = stateSlice.actions;
+export const {
+  setState,
+  setLineNumber,
+  setNameBusinessUnity,
+  setIdNameBusinessUnity,
+  setNameBU,
+  setLineNumberName,
+} = stateSlice.actions;
 
 export default stateSlice.reducer;

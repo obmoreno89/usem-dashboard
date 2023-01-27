@@ -1,5 +1,13 @@
 import { useEffect, useRef } from 'react';
 import Transition from '../../utils/Transition';
+import { useGetBusinessUnityQuery } from '../../store/apis/businessUnityApi';
+import { useGetParamNameBusinessUnityQuery } from '../../store/apis/paramNameBusinessUnityApi';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setNameBusinessUnity,
+  setIdNameBusinessUnity,
+  setNameBU,
+} from '../../store/slices/state/stateSlice';
 
 const OptionsBusinessUnityPanel = ({
   setBusinessUnityPanelOpen,
@@ -8,6 +16,15 @@ const OptionsBusinessUnityPanel = ({
 }) => {
   const closeBtn = useRef(null);
   const panelContent = useRef(null);
+  const dispatch = useDispatch();
+  const { nameBusinessUnity, idNameBusinessUnity, nameBU } = useSelector(
+    (state) => state.state
+  );
+
+  const { data: businessUnityList = [] } = useGetBusinessUnityQuery();
+
+  const { data: nameBusinessUnityList = [] } =
+    useGetParamNameBusinessUnityQuery({ nameBusinessUnity });
 
   // close if the esc key is pressed
   useEffect(() => {
@@ -18,6 +35,24 @@ const OptionsBusinessUnityPanel = ({
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  const onChangebusiness = (optionName) => {
+    if (nameBusinessUnity === optionName) {
+      dispatch(setNameBusinessUnity(null));
+    } else {
+      dispatch(setNameBusinessUnity(optionName));
+    }
+  };
+
+  const onChangeNameBusiness = (optionId, optioName) => {
+    if (idNameBusinessUnity === optionId) {
+      dispatch(setIdNameBusinessUnity(null));
+      dispatch(setNameBU(null));
+    } else {
+      dispatch(setIdNameBusinessUnity(optionId));
+      dispatch(setNameBU(optioName));
+    }
+  };
 
   return (
     <>
@@ -75,107 +110,90 @@ const OptionsBusinessUnityPanel = ({
           <section>
             <div className='w-full px-5 pt-4 2xl:pt-8'>
               <ul>
-                <div>
-                  <div className='text-md font-semibold text-slate-400 pb-2'>
-                    selecciona BU
+                {businessUnityList?.map((options, index) => (
+                  <div key={index}>
+                    <div className='text-md font-semibold text-slate-400 pb-2'>
+                      Selecciona la BU
+                    </div>
+                    <ul className='mb-4'>
+                      <li className='py-1 px-3'>
+                        <label className='flex items-center'>
+                          <input
+                            type='checkbox'
+                            className='form-checkbox'
+                            value={options.name}
+                            checked={nameBusinessUnity === options.name}
+                            onChange={() => onChangebusiness(options.name)}
+                          />
+                          <span className='text-sm font-semibold ml-2'>
+                            {options.name}
+                          </span>
+                        </label>
+                      </li>
+                    </ul>
                   </div>
-                  <ul className='mb-4'>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          business Unity
-                        </span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+                ))}
               </ul>
             </div>
-            <div className='w-full px-5 pt-4 2xl:pt-8'>
-              <ul>
-                <div>
-                  <div className='text-md font-semibold text-slate-400 pb-2'>
-                    selecciona una opcion
+
+            <div className='w-full px-5 2xl:pt-8'>
+              {nameBusinessUnity?.length > 0 && (
+                <ul>
+                  <div>
+                    <h2 className='text-md font-semibold text-slate-400 pb-2'>
+                      Selecciona el Área
+                    </h2>
                   </div>
-                  <ul className='mb-4 '>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          Cuerpos
-                        </span>
-                      </label>
-                    </li>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          Embobinado
-                        </span>
-                      </label>
-                    </li>
-                  </ul>
+                  {nameBusinessUnityList?.map((options, index) => (
+                    <div key={index}>
+                      <ul>
+                        <li className='py-1 px-3'>
+                          <label className='flex items-center'>
+                            <input
+                              type='checkbox'
+                              className='form-checkbox'
+                              value={options.id}
+                              checked={idNameBusinessUnity === options.id}
+                              onChange={() =>
+                                onChangeNameBusiness(options.id, options.name)
+                              }
+                            />
+                            <span className='text-sm font-semibold ml-2'>
+                              {options.name}
+                            </span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  ))}
+                </ul>
+              )}
+              {idNameBusinessUnity > 0 && nameBusinessUnity ? (
+                <div className='flex justify-center items-center mt-14'>
+                  <button
+                    onClick={() => {
+                      setLineNumberPanelOpen(true);
+                      setBusinessUnityPanelOpen(false);
+                    }}
+                    className='btn bg-primary hover:bg-secondary text-white hover:text-primary font-semibold w-full h-12'
+                  >
+                    Continuar
+                  </button>
                 </div>
-              </ul>
-            </div>
-            <div className='w-full px-5 pt-4 2xl:pt-8'>
-              <ul>
-                <div>
-                  <div className='text-md font-semibold text-slate-400 pb-2'>
-                    selecciona una opcion
-                  </div>
-                  <ul className='mb-4 '>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          Cuerpos
-                        </span>
-                      </label>
-                    </li>
-                    <li className='py-1 px-3'>
-                      <label className='flex items-center'>
-                        <input
-                          type='radio'
-                          className='form-checkbox'
-                          value='1'
-                        />
-                        <span className='text-sm font-semibold ml-2'>
-                          Embobinado
-                        </span>
-                      </label>
-                    </li>
-                  </ul>
+              ) : (
+                <div className='flex justify-center items-center mt-14'>
+                  <button
+                    onClick={() => {
+                      setLineNumberPanelOpen(true);
+                      setBusinessUnityPanelOpen(false);
+                    }}
+                    className='btn bg-primary text-white disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed shadow-none font-semibold w-full h-12'
+                    disabled
+                  >
+                    Continuar
+                  </button>
                 </div>
-              </ul>
-              <div className='flex justify-center items-center mt-14'>
-                <button
-                  onClick={() => {
-                    setLineNumberPanelOpen(true);
-                    setBusinessUnityPanelOpen(false);
-                  }}
-                  className='btn bg-primary hover:bg-secondary text-white hover:text-primary font-semibold w-full h-12'
-                >
-                  continuar
-                </button>
-              </div>
+              )}
             </div>
           </section>
         </div>

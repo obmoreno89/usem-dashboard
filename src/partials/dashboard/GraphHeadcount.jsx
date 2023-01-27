@@ -1,12 +1,13 @@
 import React from 'react';
 import PolarChart from '../../charts/PolarChart';
+import iconDashboard from '../../images/iconDashboard';
 import { useGetHeadcountQuery } from '../../store/apis/headcountApi';
 import { useSelector } from 'react-redux';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphHeadcount() {
+function GraphHeadcount({ setGraphModalHeadcountOpen, width, height, icon }) {
   const { dateState, lineNumber } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -41,7 +42,23 @@ function GraphHeadcount() {
   return (
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <header className='px-5 py-4 border-b border-slate-100'>
-        <h2 className='font-semibold text-slate-800'>Headcount</h2>
+        <div className='flex justify-between'>
+          <h2 className='font-semibold text-slate-800'>Headcount</h2>
+          {!icon && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setGraphModalHeadcountOpen(true);
+              }}
+            >
+              <img
+                className='w-7'
+                src={iconDashboard.maximize}
+                alt='Maximize'
+              />
+            </button>
+          )}
+        </div>
         <div className='text-xs font-semibold text-slate-400 uppercase mb-1'>
           {dateState.join(' ')}
           <p>total de personal: {personalTotal}</p>
@@ -49,7 +66,12 @@ function GraphHeadcount() {
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
-      <PolarChart name='Porcentaje' data={chartData} width={389} height={260} />
+      <PolarChart
+        name='Porcentaje'
+        data={chartData}
+        width={width ? 1200 : 389}
+        height={height ? 400 : 260}
+      />
     </div>
   );
 }
