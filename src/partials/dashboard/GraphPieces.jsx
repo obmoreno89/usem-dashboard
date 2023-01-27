@@ -35,8 +35,12 @@ function GraphPieces({ setGraphModalPiecesOpen, width, height, icon }) {
 
   piecesBad.forEach((bad) => (badTotal += bad));
 
+  let undefinedValues = datePieces.filter(value => value === undefined);
+  let hasUndefined = undefinedValues.length > 0;
+  console.log(hasUndefined)
+
   const piecesValidation = () => {
-    if (error === undefined) {
+    if (!hasUndefined) {
       return (
         <div className='flex space-x-2'>
           <p className='text-cyan-700'>{okTotal}</p>
@@ -44,7 +48,7 @@ function GraphPieces({ setGraphModalPiecesOpen, width, height, icon }) {
           <p className='text-red-500'>{badTotal}</p>
         </div>
       );
-    } else if (error.status === 404) {
+    } else if (hasUndefined) {
       return <p>0 Piezas</p>;
     } else {
       return <p>{piecesList.length}</p>;
