@@ -1,12 +1,13 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
+import iconDashboard from '../../images/iconDashboard';
 import { useGetPiecesQuery } from '../../store/apis/apiPieces';
 import { useSelector } from 'react-redux';
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphPieces() {
+function GraphPieces({ setGraphModalPiecesOpen, width, height, icon }) {
   const { dateState, lineNumberName } = useSelector((state) => state.state);
   const getFirstDate = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDate[0];
@@ -15,7 +16,7 @@ function GraphPieces() {
   const { data: piecesList = [], error } = useGetPiecesQuery({
     fromDate,
     toDate,
-    lineNumberName
+    lineNumberName,
   });
 
   console.log(piecesList);
@@ -89,7 +90,20 @@ function GraphPieces() {
         <header className='flex justify-between items-start mb-2'>
           {/* Icon */}
           <img src={iconGraph.pieces} width='32' height='32' alt='Icon 03' />
-          {/* Menu button */}
+          {!icon && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setGraphModalPiecesOpen(true);
+              }}
+            >
+              <img
+                className='w-7'
+                src={iconDashboard.maximize}
+                alt='Maximize'
+              />
+            </button>
+          )}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
           Piezas <span className='text-cyan-700'>OK</span> y{' '}
@@ -107,7 +121,12 @@ function GraphPieces() {
       {/* Chart built with Chart.js 3 */}
       <div className='grow'>
         {/* Change the height attribute to adjust the chart height */}
-        <LineChart name='Piezas' data={chartData} width={389} height={128} />
+        <LineChart
+          name='Piezas'
+          data={chartData}
+          width={width ? 1200 : 389}
+          height={height ? 400 : 128}
+        />
       </div>
     </div>
   );

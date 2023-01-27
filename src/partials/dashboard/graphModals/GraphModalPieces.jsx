@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import ModalBlank from '../../../components/ModalBlank';
-import GraphIncident from '../GraphIncident';
+import GraphPieces from '../GraphPieces';
 import iconDashboard from '../../../images/iconDashboard';
 
-function GraphModalIncident({
-  setGraphModalIncidentOpen,
-  graphModalIncidentOpen,
-}) {
+function GraphModalPieces({ setGraphModalPiecesOpen, graphModalPiecesOpen }) {
   return (
     <div className='m-1.5 '>
       <ModalBlank
         id='success-modal'
-        modalOpen={graphModalIncidentOpen}
-        setModalOpen={setGraphModalIncidentOpen}
+        modalOpen={graphModalPiecesOpen}
+        setModalOpen={setGraphModalPiecesOpen}
       >
         <div className='p-5 flex space-x-4 '>
           <div className='relative'>
@@ -20,7 +17,7 @@ function GraphModalIncident({
               className='absolute top-6 right-4'
               onClick={(e) => {
                 e.stopPropagation();
-                setGraphModalIncidentOpen(false);
+                setGraphModalPiecesOpen(false);
               }}
             >
               <img
@@ -30,7 +27,7 @@ function GraphModalIncident({
               />
             </button>
             <section>
-              <GraphIncident width={true} height={true} icon={true} />
+              <GraphPieces width={true} height={true} icon={true} />
             </section>
           </div>
         </div>
@@ -40,4 +37,4 @@ function GraphModalIncident({
   );
 }
 
-export default GraphModalIncident;
+export default GraphModalPieces;
