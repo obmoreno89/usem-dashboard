@@ -17,6 +17,7 @@ import GraphModalIncident from '../partials/dashboard/graphModals/GraphModalInci
 import GraphModalPieces from '../partials/dashboard/graphModals/GraphModalPieces';
 import GraphModalDowntime from '../partials/dashboard/graphModals/GraphModalDowntime';
 import GraphModalOperationTime from '../partials/dashboard/graphModals/GraphModalOperationTime';
+import GraphModalHeadCount from '../partials/dashboard/graphModals/GraphModalHeadcount';
 
 import { useSelector } from 'react-redux';
 
@@ -30,6 +31,7 @@ function Dashboard() {
   const [graphModalDowntimeOpen, setGraphModalDowntimeOpen] = useState(false);
   const [graphModalOperationTimeOpen, setGraphModalOperationTimeOpen] =
     useState(false);
+  const [graphModalHeadcountOpen, setGraphModalHeadcountOpen] = useState(false);
 
   const { nameBusinessUnity, nameBU, lineNumberName } = useSelector(
     (state) => state.state
@@ -108,7 +110,9 @@ function Dashboard() {
 
               <GraphReWork /> */}
 
-              <GraphHeadcount />
+              <GraphHeadcount
+                setGraphModalHeadcountOpen={setGraphModalHeadcountOpen}
+              />
             </div>
 
             <section className='mt-8'>
@@ -156,6 +160,12 @@ function Dashboard() {
               <GraphModalOperationTime
                 graphModalOperationTimeOpen={graphModalOperationTimeOpen}
                 setGraphModalOperationTimeOpen={setGraphModalOperationTimeOpen}
+              />
+            </section>
+            <section>
+              <GraphModalHeadCount
+                graphModalHeadcountOpen={graphModalHeadcountOpen}
+                setGraphModalHeadcountOpen={setGraphModalHeadcountOpen}
               />
             </section>
           </div>

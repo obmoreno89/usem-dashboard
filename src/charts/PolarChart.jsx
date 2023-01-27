@@ -67,45 +67,45 @@ function PolarChart({ data, width, height, name }) {
               ul.firstChild.remove();
             }
             // Reuse the built-in legendItems generator
-            const items = c.options.plugins.legend.labels.generateLabels(c);
-            items.forEach((item) => {
-              const li = document.createElement('li');
-              li.style.margin = tailwindConfig().theme.margin[1];
-              // Button element
-              const button = document.createElement('button');
-              button.classList.add('btn-xs');
-              button.style.backgroundColor =
-                tailwindConfig().theme.colors.white;
-              button.style.borderWidth = tailwindConfig().theme.borderWidth[1];
-              button.style.borderColor =
-                tailwindConfig().theme.colors.slate[200];
-              button.style.color = tailwindConfig().theme.colors.slate[500];
-              button.style.boxShadow = tailwindConfig().theme.boxShadow.md;
-              button.style.opacity = item.hidden ? '.3' : '';
-              button.onclick = () => {
-                c.toggleDataVisibility(item.index, !item.index);
-                c.update();
-              };
-              // Color box
-              const box = document.createElement('span');
-              box.style.display = 'block';
-              box.style.width = tailwindConfig().theme.width[2];
-              box.style.height = tailwindConfig().theme.height[2];
-              box.style.backgroundColor = item.fillStyle;
-              box.style.borderRadius = tailwindConfig().theme.borderRadius.sm;
-              box.style.marginRight = tailwindConfig().theme.margin[1];
-              box.style.pointerEvents = 'none';
-              // Label
-              const label = document.createElement('span');
-              label.style.display = 'flex';
-              label.style.alignItems = 'center';
-              const labelText = document.createTextNode(item.text);
-              label.appendChild(labelText);
-              li.appendChild(button);
-              button.appendChild(box);
-              button.appendChild(label);
-              ul.appendChild(li);
-            });
+            // const items = c.options.plugins.legend.labels.generateLabels(c);
+            // items.forEach((item) => {
+            //   const li = document.createElement('li');
+            //   li.style.margin = tailwindConfig().theme.margin[1];
+            //   // Button element
+            //   const button = document.createElement('button');
+            //   button.classList.add('btn-xs');
+            //   button.style.backgroundColor =
+            //     tailwindConfig().theme.colors.white;
+            //   button.style.borderWidth = tailwindConfig().theme.borderWidth[1];
+            //   button.style.borderColor =
+            //     tailwindConfig().theme.colors.slate[200];
+            //   button.style.color = tailwindConfig().theme.colors.slate[500];
+            //   button.style.boxShadow = tailwindConfig().theme.boxShadow.md;
+            //   button.style.opacity = item.hidden ? '.3' : '';
+            //   button.onclick = () => {
+            //     c.toggleDataVisibility(item.index, !item.index);
+            //     c.update();
+            //   };
+            //   // Color box
+            //   const box = document.createElement('span');
+            //   box.style.display = 'block';
+            //   box.style.width = tailwindConfig().theme.width[2];
+            //   box.style.height = tailwindConfig().theme.height[2];
+            //   box.style.backgroundColor = item.fillStyle;
+            //   box.style.borderRadius = tailwindConfig().theme.borderRadius.sm;
+            //   box.style.marginRight = tailwindConfig().theme.margin[1];
+            //   box.style.pointerEvents = 'none';
+            //   // Label
+            //   const label = document.createElement('span');
+            //   label.style.display = 'flex';
+            //   label.style.alignItems = 'center';
+            //   const labelText = document.createTextNode(item.text);
+            //   label.appendChild(labelText);
+            //   li.appendChild(button);
+            //   button.appendChild(box);
+            //   button.appendChild(label);
+            //   ul.appendChild(li);
+            // });
           },
         },
       ],
