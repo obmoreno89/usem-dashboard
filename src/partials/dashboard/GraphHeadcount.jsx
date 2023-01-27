@@ -70,7 +70,7 @@ function GraphHeadcount({ setGraphModalHeadcountOpen, width, height, icon }) {
         name='Porcentaje'
         data={chartData}
         width={width ? 1200 : 389}
-        height={height ? 400 : 260}
+        height={height ? 400 : 210}
       />
     </div>
   );

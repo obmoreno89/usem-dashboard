@@ -64,7 +64,6 @@ function GraphDowntime({ setGraphModalDowntimeOpen, width, height, icon }) {
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <div className='px-5 pt-5'>
         <header className='flex justify-between items-start mb-2'>
-          {/* Icon */}
           <img src={iconGraph.time} width='32' height='32' alt='Icon 03' />
           {!icon && (
             <button
@@ -91,9 +90,8 @@ function GraphDowntime({ setGraphModalDowntimeOpen, width, height, icon }) {
           </div>
         </div>
       </div>
-      {/* Chart built with Chart.js 3 */}
+
       <div className='grow'>
-        {/* Change the height attribute to adjust the chart height */}
         <LineChart
           name='Downtime'
           data={chartData}
