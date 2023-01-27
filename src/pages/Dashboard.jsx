@@ -12,12 +12,15 @@ import GraphHeadcount from '../partials/dashboard/GraphHeadcount';
 import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
 import OptionsBusinessUnityPanel from '../partials/dashboard/OptionsBusinessUnityPanel';
 import LineNumberPanel from '../partials/dashboard/LineNumberPanel';
+import GraphModalAccident from '../partials/dashboard/graphModals/GraphModalAccident';
+
 import { useSelector } from 'react-redux';
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [businessUnityPanelOpen, setBusinessUnityPanelOpen] = useState(false);
   const [lineNumberPanelOpen, setLineNumberPanelOpen] = useState(false);
+  const [graphModalAccidentOpen, setGraphModalAccidentOpen] = useState(false);
 
   const { nameBusinessUnity, nameBU, lineNumberName } = useSelector(
     (state) => state.state
@@ -74,7 +77,9 @@ function Dashboard() {
               </div>
             </div>
             <div className='grid grid-cols-12 gap-6'>
-              <GraphAccident />
+              <GraphAccident
+                setGraphModalAccidentOpen={setGraphModalAccidentOpen}
+              />
 
               <GraphIncident />
 
@@ -106,6 +111,12 @@ function Dashboard() {
                 setBusinessUnityPanelOpen={setBusinessUnityPanelOpen}
                 setLineNumberPanelOpen={setLineNumberPanelOpen}
                 lineNumberPanelOpen={lineNumberPanelOpen}
+              />
+            </section>
+            <section>
+              <GraphModalAccident
+                graphModalAccidentOpen={graphModalAccidentOpen}
+                setGraphModalAccidentOpen={setGraphModalAccidentOpen}
               />
             </section>
           </div>

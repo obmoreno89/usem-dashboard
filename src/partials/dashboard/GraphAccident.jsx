@@ -1,14 +1,17 @@
 import React from 'react';
 import LineChart from '../../charts/LineChart01';
 import iconGraph from '../../images/iconGraph';
+import iconDashboard from '../../images/iconDashboard';
 import { useSelector } from 'react-redux';
 import { useGetAccidentQuery } from '../../store/apis/accidentApi';
 
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
-function GraphAccident() {
-  const { dateState, lineNumber, lineNumberName } = useSelector((state) => state.state);
+function GraphAccident({ setGraphModalAccidentOpen, width, height, icon }) {
+  const { dateState, lineNumber, lineNumberName } = useSelector(
+    (state) => state.state
+  );
   const getFirstDateAccident = dateState.map((firstDate) => firstDate);
   const fromDate = getFirstDateAccident[0];
   const toDate = getFirstDateAccident[2];
@@ -72,9 +75,21 @@ function GraphAccident() {
     <div className='flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200'>
       <div className='px-5 pt-5'>
         <header className='flex justify-between items-start mb-2'>
-          {/* Icon */}
           <img src={iconGraph.turrets} width='32' height='32' alt='Torreta' />
-          {/* Menu button */}
+          {!icon && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setGraphModalAccidentOpen(true);
+              }}
+            >
+              <img
+                className='w-7'
+                src={iconDashboard.maximize}
+                alt='Maximize'
+              />
+            </button>
+          )}
         </header>
         <h2 className='text-lg font-semibold text-slate-800 mb-2'>
           Accidentes
@@ -94,8 +109,8 @@ function GraphAccident() {
         <LineChart
           name='Accidentes'
           data={chartData}
-          width={389}
-          height={128}
+          width={width ? 1200 : 389}
+          height={height ? 400 : 128}
         />
       </div>
     </div>

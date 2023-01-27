@@ -35,6 +35,15 @@ function LineChart01({ data, width, height, name }) {
       type: 'line',
       data: data,
       options: {
+        animations: {
+          tension: {
+            duration: 1000,
+            easing: 'linear',
+            from: 1,
+            to: 0,
+            loop: true,
+          },
+        },
         chartArea: {
           backgroundColor: tailwindConfig().theme.colors.slate[50],
         },
