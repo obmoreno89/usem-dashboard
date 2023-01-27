@@ -16,6 +16,7 @@ import GraphModalAccident from '../partials/dashboard/graphModals/GraphModalAcci
 import GraphModalIncident from '../partials/dashboard/graphModals/GraphModalIncident';
 import GraphModalPieces from '../partials/dashboard/graphModals/GraphModalPieces';
 import GraphModalDowntime from '../partials/dashboard/graphModals/GraphModalDowntime';
+import GraphModalOperationTime from '../partials/dashboard/graphModals/GraphModalOperationTime';
 
 import { useSelector } from 'react-redux';
 
@@ -27,6 +28,8 @@ function Dashboard() {
   const [graphModalIncidentOpen, setGraphModalIncidentOpen] = useState(false);
   const [graphModalPiecesOpen, setGraphModalPiecesOpen] = useState(false);
   const [graphModalDowntimeOpen, setGraphModalDowntimeOpen] = useState(false);
+  const [graphModalOperationTimeOpen, setGraphModalOperationTimeOpen] =
+    useState(false);
 
   const { nameBusinessUnity, nameBU, lineNumberName } = useSelector(
     (state) => state.state
@@ -97,7 +100,9 @@ function Dashboard() {
                 setGraphModalDowntimeOpen={setGraphModalDowntimeOpen}
               />
 
-              <GraphOperationTime />
+              <GraphOperationTime
+                setGraphModalOperationTimeOpen={setGraphModalOperationTimeOpen}
+              />
 
               {/* <GraphPpa />
 
@@ -145,6 +150,12 @@ function Dashboard() {
               <GraphModalDowntime
                 graphModalDowntimeOpen={graphModalDowntimeOpen}
                 setGraphModalDowntimeOpen={setGraphModalDowntimeOpen}
+              />
+            </section>
+            <section>
+              <GraphModalOperationTime
+                graphModalOperationTimeOpen={graphModalOperationTimeOpen}
+                setGraphModalOperationTimeOpen={setGraphModalOperationTimeOpen}
               />
             </section>
           </div>
