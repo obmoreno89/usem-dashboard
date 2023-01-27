@@ -11,6 +11,9 @@ import {
   Tooltip,
 } from 'chart.js';
 import 'chartjs-adapter-moment';
+import zoomPlugin from 'chartjs-plugin-zoom';
+
+Chart.register(zoomPlugin);
 
 // Import utilities
 import { tailwindConfig, formatValue } from '../utils/Utils';
@@ -30,25 +33,18 @@ function LineChart01({ data, width, height, name }) {
 
   useEffect(() => {
     const ctx = canvas.current;
-    // eslint-disable-next-line no-unused-vars
+
     const chart = new Chart(ctx, {
       type: 'line',
       data: data,
+
       options: {
-        animations: {
-          tension: {
-            duration: 1000,
-            easing: 'linear',
-            from: 1,
-            to: 0,
-            loop: true,
-          },
-        },
+        responsive: true,
         chartArea: {
           backgroundColor: tailwindConfig().theme.colors.slate[50],
         },
         layout: {
-          padding: 20,
+          padding: 5,
         },
         scales: {
           y: {
@@ -65,6 +61,18 @@ function LineChart01({ data, width, height, name }) {
           },
         },
         plugins: {
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true,
+                speed: 0.1,
+              },
+              pinch: {
+                enabled: true,
+              },
+              mode: 'x',
+            },
+          },
           tooltip: {
             callbacks: {
               title: () => name, // Disable tooltip title
