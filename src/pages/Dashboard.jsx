@@ -13,6 +13,7 @@ import GraphOperationTime from '../partials/dashboard/GraphOperationTime';
 import OptionsBusinessUnityPanel from '../partials/dashboard/OptionsBusinessUnityPanel';
 import LineNumberPanel from '../partials/dashboard/LineNumberPanel';
 import GraphModalAccident from '../partials/dashboard/graphModals/GraphModalAccident';
+import GraphModalIncident from '../partials/dashboard/graphModals/GraphModalIncident';
 
 import { useSelector } from 'react-redux';
 
@@ -21,6 +22,7 @@ function Dashboard() {
   const [businessUnityPanelOpen, setBusinessUnityPanelOpen] = useState(false);
   const [lineNumberPanelOpen, setLineNumberPanelOpen] = useState(false);
   const [graphModalAccidentOpen, setGraphModalAccidentOpen] = useState(false);
+  const [graphModalIncidentOpen, setGraphModalIncidentOpen] = useState(false);
 
   const { nameBusinessUnity, nameBU, lineNumberName } = useSelector(
     (state) => state.state
@@ -81,7 +83,9 @@ function Dashboard() {
                 setGraphModalAccidentOpen={setGraphModalAccidentOpen}
               />
 
-              <GraphIncident />
+              <GraphIncident
+                setGraphModalIncidentOpen={setGraphModalIncidentOpen}
+              />
 
               <GraphPieces />
 
@@ -117,6 +121,12 @@ function Dashboard() {
               <GraphModalAccident
                 graphModalAccidentOpen={graphModalAccidentOpen}
                 setGraphModalAccidentOpen={setGraphModalAccidentOpen}
+              />
+            </section>
+            <section>
+              <GraphModalIncident
+                graphModalIncidentOpen={graphModalIncidentOpen}
+                setGraphModalIncidentOpen={setGraphModalIncidentOpen}
               />
             </section>
           </div>
